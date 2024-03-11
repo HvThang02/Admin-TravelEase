@@ -1,0 +1,763 @@
+{
+  "role": [
+    {
+      "id": "1",
+      "role_name": "Admin"
+    },
+    {
+      "id": "2",
+      "role_name": "User"
+    },
+    {
+      "id": "3",
+      "role_name": "Guest"
+    }
+  ],
+  "rooms": [
+    {
+      "id": "1",
+      "room_name": "Room 1",
+      "room_status": 1,
+      "room_price": 100,
+      "room_quantity": 5,
+      "hotel_id": 6,
+      "room_type_id": 1
+    },
+    {
+      "id": "2",
+      "room_name": "Room 2",
+      "room_status": 0,
+      "room_price": 150,
+      "room_quantity": 3,
+      "hotel_id": 6,
+      "room_type_id": 2
+    },
+    {
+      "id": "3",
+      "room_name": "Room 3",
+      "room_status": 1,
+      "room_price": 200,
+      "room_quantity": 2,
+      "hotel_id": 6,
+      "room_type_id": 1
+    }
+  ],
+  "room-types": [
+    {
+      "id": "1",
+      "room_type_name": "Standard",
+      "room_type_price": "100"
+    },
+    {
+      "id": "2",
+      "room_type_name": "Deluxe",
+      "room_type_price": "200"
+    },
+    {
+      "id": "3",
+      "room_type_name": "Suite",
+      "room_type_price": "300"
+    }
+  ],
+  "users": [
+    {
+      "id": "1",
+      "email": "user1@example.com",
+      "phone_number": "1234567890",
+      "fullname": "John Doe",
+      "gender": true,
+      "dob": "1990-01-01",
+      "avatar": "https://example.com/avatar1.jpg",
+      "role_id": 2
+    },
+    {
+      "id": "2",
+      "email": "user2@example.com",
+      "phone_number": "0987654321",
+      "fullname": "Jane Smith",
+      "gender": false,
+      "dob": "1995-05-10",
+      "avatar": "https://example.com/avatar2.jpg",
+      "role_id": 1
+    }
+  ],
+  "hotels": [
+    {
+      "id": "1",
+      "hotel_name": "JW Marriott Hotel Hanoi",
+      "hotel_address": "8 Do Duc Duc, Me Tri, Tu Liem, Hanoi, Vietnam",
+      "hotel_city": "Hanoi",
+      "hotel_country": "Vietnam",
+      "hotel_contact_number": "+84 24 3833 5588",
+      "hotel_email": "info@marriott.com",
+      "hotel_description": "JW Marriott Hotel Hanoi is a 5-star hotel located in the heart of Hanoi, Vietnam. The hotel is a 5-minute walk from the National Convention Center and 29 km from Noi Bai International Airport. The hotel offers 5-star accommodations, a fitness center, and a spa. The hotel has 450 rooms and suites, 5 restaurants, and 2 bars. The hotel is a great choice for travelers interested in sightseeing, friendly locals, and food.",
+      "star_rating": "5",
+      "check_in_time": "15:00",
+      "check_out_time": "12:00",
+      "status": "approved",
+      "minPrice": "$200",
+      "user_id": 1
+    },
+    {
+      "id": "2",
+      "hotel_name": "Grand Hyatt Tokyo",
+      "hotel_address": "6-10-3 Roppongi, Minato-ku, Tokyo, Japan",
+      "hotel_city": "Tokyo",
+      "hotel_country": "Japan",
+      "hotel_contact_number": "+81 3-4333-1234",
+      "hotel_email": "info@grandhyatttokyo.com",
+      "hotel_description": "Grand Hyatt Tokyo is a luxury hotel located in the vibrant Roppongi district of Tokyo, Japan. The hotel offers spacious rooms, multiple dining options, a spa, and a fitness center. It is conveniently located near popular attractions such as Tokyo Tower and the Mori Art Museum. Guests can enjoy stunning views of the city skyline from the hotel's rooftop bar. The hotel is known for its exceptional service and attention to detail.",
+      "star_rating": "5",
+      "check_in_time": "15:00",
+      "check_out_time": "12:00",
+      "status": "approved",
+      "minPrice": "$300",
+      "user_id": 2
+    },
+    {
+      "id": "7",
+      "hotel_name": "The Savoy",
+      "hotel_address": "Strand, London WC2R 0EZ, United Kingdom",
+      "hotel_city": "London",
+      "hotel_country": "United Kingdom",
+      "hotel_contact_number": "+44 20 7836 4343",
+      "hotel_email": "info@thesavoylondon.com",
+      "hotel_description": "The Savoy is a prestigious 5-star hotel located on the Strand in London, United Kingdom. It is known for its timeless elegance and exceptional service. The hotel offers luxurious accommodations, world-class dining options, a spa, and a fitness center. It has a rich history and has welcomed royalty, celebrities, and discerning travelers from around the world. The Savoy provides a luxurious and unforgettable experience in the heart of London.",
+      "star_rating": "5",
+      "check_in_time": "15:00",
+      "check_out_time": "12:00",
+      "status": "approved",
+      "minPrice": "$600",
+      "user_id": 7
+    },
+    {
+      "id": "8",
+      "hotel_name": "Hotel de Crillon",
+      "hotel_address": "10 Place de la Concorde, 75008 Paris, France",
+      "hotel_city": "Paris",
+      "hotel_country": "France",
+      "hotel_contact_number": "+33 1 44 71 15 00",
+      "hotel_email": "info@crillon.com",
+      "hotel_description": "Hotel de Crillon is a luxurious 5-star hotel located in the prestigious Place de la Concorde in Paris, France. It offers elegant accommodations, Michelin-starred dining options, a spa, and a fitness center. The hotel is housed in a historic building and showcases exquisite French craftsmanship and design. Hotel de Crillon provides a sophisticated and refined experience for its guests.",
+      "star_rating": "5",
+      "check_in_time": "15:00",
+      "check_out_time": "12:00",
+      "status": "approved",
+      "minPrice": "$800",
+      "user_id": 8
+    },
+    {
+      "id": "9",
+      "hotel_name": "Emirates Palace",
+      "hotel_address": "West Corniche Road, Abu Dhabi, United Arab Emirates",
+      "hotel_city": "Abu Dhabi",
+      "hotel_country": "United Arab Emirates",
+      "hotel_contact_number": "+971 2 690 9000",
+      "hotel_email": "info@emiratespalace.com",
+      "hotel_description": "Emirates Palace is a luxurious 5-star hotel located on the shores of the Arabian Gulf in Abu Dhabi, United Arab Emirates. It is known for its grand architecture, opulent interiors, and extensive gardens. The hotel offers lavish accommodations, world-class dining options, a spa, and a private beach. Guests can indulge in a range of activities, including camel riding and water sports. Emirates Palace provides a regal and unforgettable experience.",
+      "star_rating": "5",
+      "check_in_time": "15:00",
+      "check_out_time": "12:00",
+      "status": "approved",
+      "minPrice": "$900",
+      "user_id": 9
+    },
+    {
+      "id": "10",
+      "hotel_name": "Mandarin Oriental, Bangkok",
+      "hotel_address": "48 Oriental Avenue, Bangkok 10500, Thailand",
+      "hotel_city": "Bangkok",
+      "hotel_country": "Thailand",
+      "hotel_contact_number": "+66 2 659 9000",
+      "hotel_email": "info@mandarinoriental.com",
+      "hotel_description": "Mandarin Oriental, Bangkok is a legendary 5-star hotel located on the banks of the Chao Phraya River in Bangkok, Thailand. It is known for its timeless elegance, impeccable service, and stunning river views. The hotel offers luxurious accommodations, award-winning dining options, a spa, and a fitness center. It is situated near popular attractions such as the Grand Palace and Wat Arun. Mandarin Oriental, Bangkok provides a luxurious retreat in the heart of the city.",
+      "star_rating": "5",
+      "check_in_time": "15:00",
+      "check_out_time": "12:00",
+      "status": "approved",
+      "minPrice": "$500",
+      "user_id": 10
+    }
+  ],
+  "approve-hotels": [
+    {
+      "id": "6",
+      "hotel_name": "Hotel Adlon Kempinski Berlin",
+      "hotel_address": "Unter den Linden 77, 10117 Berlin, Germany",
+      "hotel_city": "Berlin",
+      "hotel_country": "Germany",
+      "hotel_contact_number": "+49 30 22610",
+      "hotel_email": "info@hoteladlon.com",
+      "hotel_description": "Hotel Adlon Kempinski Berlin is a historic 5-star hotel located in the heart of Berlin, Germany. It is situated near popular attractions such as Brandenburg Gate and the Berlin Wall. The hotel offers luxurious rooms, fine dining options, a spa, and a fitness center. It has a rich history and has hosted numerous celebrities and dignitaries. Hotel Adlon Kempinski Berlin provides a blend of modern luxury and old-world charm.",
+      "star_rating": "5",
+      "check_in_time": "15:00",
+      "check_out_time": "12:00",
+      "status": "await",
+      "minPrice": "$400",
+      "hotel_policy": "",
+      "hotel_image": [
+        "https://img.freepik.com/free-photo/modern-spacious-room-with-large-panoramic-window_7502-7289.jpg?w=1380&t=st=1710141114~exp=1710141714~hmac=74692f396e2c090c66b23f27a14af3b6ba9e6819b76ccd2445b6d5c0582d260d",
+        "https://img.freepik.com/free-photo/modern-spacious-room-with-large-panoramic-window_7502-7289.jpg?w=1380&t=st=1710141114~exp=1710141714~hmac=74692f396e2c090c66b23f27a14af3b6ba9e6819b76ccd2445b6d5c0582d260d",
+        "https://img.freepik.com/free-photo/modern-spacious-room-with-large-panoramic-window_7502-7289.jpg?w=1380&t=st=1710141114~exp=1710141714~hmac=74692f396e2c090c66b23f27a14af3b6ba9e6819b76ccd2445b6d5c0582d260d"
+      ],
+      "hotel_facilities": [
+        {
+          "facility_image": "https://theme.hstatic.net/1000340570/1000964732/14/icon-favorite.svg?v=3992",
+          "facility_name": "Free Wifi"
+        },
+        {
+          "facility_image": "https://theme.hstatic.net/1000340570/1000964732/14/icon-favorite.svg?v=3992",
+          "facility_name": "Free Breakfast"
+        },
+        {
+          "facility_image": "https://theme.hstatic.net/1000340570/1000964732/14/icon-favorite.svg?v=3992",
+          "facility_name": "Free Parking"
+        },
+        {
+          "facility_image": "https://theme.hstatic.net/1000340570/1000964732/14/icon-favorite.svg?v=3992",
+          "facility_name": "Swimming Pool"
+        },
+        {
+          "facility_image": "https://theme.hstatic.net/1000340570/1000964732/14/icon-favorite.svg?v=3992",
+          "facility_name": "Gym"
+        },
+        {
+          "facility_image": "https://theme.hstatic.net/1000340570/1000964732/14/icon-favorite.svg?v=3992",
+          "facility_name": "Spa"
+        },
+        {
+          "facility_image": "https://theme.hstatic.net/1000340570/1000964732/14/icon-favorite.svg?v=3992",
+          "facility_name": "Restaurant"
+        },
+        {
+          "facility_image": "https://theme.hstatic.net/1000340570/1000964732/14/icon-favorite.svg?v=3992",
+          "facility_name": "Bar"
+        },
+        {
+          "facility_image": "https://theme.hstatic.net/1000340570/1000964732/14/icon-favorite.svg?v=3992",
+          "facility_name": "Laundry"
+        },
+        {
+          "facility_image": "https://theme.hstatic.net/1000340570/1000964732/14/icon-favorite.svg?v=3992",
+          "facility_name": "Room Service"
+        },
+        {
+          "facility_image": "https://theme.hstatic.net/1000340570/1000964732/14/icon-favorite.svg?v=3992",
+          "facility_name": "Airport Transfer"
+        },
+        {
+          "facility_image": "https://theme.hstatic.net/1000340570/1000964732/14/icon-favorite.svg?v=3992",
+          "facility_name": "Airport Transfer"
+        },
+        {
+          "facility_image": "https://theme.hstatic.net/1000340570/1000964732/14/icon-favorite.svg?v=3992",
+          "facility_name": "Airport Transfer"
+        },
+        {
+          "facility_image": "https://theme.hstatic.net/1000340570/1000964732/14/icon-favorite.svg?v=3992",
+          "facility_name": "Airport Transfer"
+        },
+        {
+          "facility_image": "https://theme.hstatic.net/1000340570/1000964732/14/icon-favorite.svg?v=3992",
+          "facility_name": "Airport Transfer"
+        },
+        {
+          "facility_image": "https://theme.hstatic.net/1000340570/1000964732/14/icon-favorite.svg?v=3992",
+          "facility_name": "Airport Transfer"
+        },
+        {
+          "facility_image": "https://theme.hstatic.net/1000340570/1000964732/14/icon-favorite.svg?v=3992",
+          "facility_name": "Airport Transfer"
+        }
+      ],
+      "rooms": [
+        {
+          "id": 1,
+          "room_name": "Room 1",
+          "room_status": 1,
+          "room_price": 100,
+          "room_quantity": 5,
+          "room_type_name": "Standard",
+          "room_image": [
+            "https://img.freepik.com/free-photo/modern-spacious-room-with-large-panoramic-window_7502-7289.jpg?w=1380&t=st=1710141114~exp=1710141714~hmac=74692f396e2c090c66b23f27a14af3b6ba9e6819b76ccd2445b6d5c0582d260d",
+            "https://img.freepik.com/free-photo/modern-spacious-room-with-large-panoramic-window_7502-7289.jpg?w=1380&t=st=1710141114~exp=1710141714~hmac=74692f396e2c090c66b23f27a14af3b6ba9e6819b76ccd2445b6d5c0582d260d",
+            "https://img.freepik.com/free-photo/modern-spacious-room-with-large-panoramic-window_7502-7289.jpg?w=1380&t=st=1710141114~exp=1710141714~hmac=74692f396e2c090c66b23f27a14af3b6ba9e6819b76ccd2445b6d5c0582d260d"
+          ],
+          "room_facilities": [
+            {
+              "facility_image": "https://theme.hstatic.net/1000340570/1000964732/14/icon-favorite.svg?v=3992",
+              "facility_name": "Free Wifi"
+            },
+            {
+              "facility_image": "https://theme.hstatic.net/1000340570/1000964732/14/icon-favorite.svg?v=3992",
+              "facility_name": "Free Breakfast"
+            },
+            {
+              "facility_image": "https://theme.hstatic.net/1000340570/1000964732/14/icon-favorite.svg?v=3992",
+              "facility_name": "Free Parking"
+            },
+            {
+              "facility_image": "https://theme.hstatic.net/1000340570/1000964732/14/icon-favorite.svg?v=3992",
+              "facility_name": "Swimming Pool"
+            },
+            {
+              "facility_image": "https://theme.hstatic.net/1000340570/1000964732/14/icon-favorite.svg?v=3992",
+              "facility_name": "Gym"
+            },
+            {
+              "facility_image": "https://theme.hstatic.net/1000340570/1000964732/14/icon-favorite.svg?v=3992",
+              "facility_name": "Spa"
+            },
+            {
+              "facility_image": "https://theme.hstatic.net/1000340570/1000964732/14/icon-favorite.svg?v=3992",
+              "facility_name": "Restaurant"
+            },
+            {
+              "facility_image": "https://theme.hstatic.net/1000340570/1000964732/14/icon-favorite.svg?v=3992",
+              "facility_name": "Bar"
+            },
+            {
+              "facility_image": "https://theme.hstatic.net/1000340570/1000964732/14/icon-favorite.svg?v=3992",
+              "facility_name": "Laundry"
+            },
+            {
+              "facility_image": "https://theme.hstatic.net/1000340570/1000964732/14/icon-favorite.svg?v=3992",
+              "facility_name": "Room Service"
+            },
+            {
+              "facility_image": "https://theme.hstatic.net/1000340570/1000964732/14/icon-favorite.svg?v=3992",
+              "facility_name": "Airport Transfer"
+            }
+          ]
+        },
+        {
+          "id": 2,
+          "room_name": "Room 2",
+          "room_status": 0,
+          "room_price": 150,
+          "room_quantity": 3,
+          "room_type_name": "Deluxe",
+          "room_image": [
+            "https://img.freepik.com/free-photo/modern-spacious-room-with-large-panoramic-window_7502-7289.jpg?w=1380&t=st=1710141114~exp=1710141714~hmac=74692f396e2c090c66b23f27a14af3b6ba9e6819b76ccd2445b6d5c0582d260d",
+            "https://img.freepik.com/free-photo/modern-spacious-room-with-large-panoramic-window_7502-7289.jpg?w=1380&t=st=1710141114~exp=1710141714~hmac=74692f396e2c090c66b23f27a14af3b6ba9e6819b76ccd2445b6d5c0582d260d",
+            "https://img.freepik.com/free-photo/modern-spacious-room-with-large-panoramic-window_7502-7289.jpg?w=1380&t=st=1710141114~exp=1710141714~hmac=74692f396e2c090c66b23f27a14af3b6ba9e6819b76ccd2445b6d5c0582d260d"
+          ],
+          "room_facilities": [
+            {
+              "facility_image": "https://theme.hstatic.net/1000340570/1000964732/14/icon-favorite.svg?v=3992",
+              "facility_name": "Free Wifi"
+            },
+            {
+              "facility_image": "https://theme.hstatic.net/1000340570/1000964732/14/icon-favorite.svg?v=3992",
+              "facility_name": "Free Breakfast"
+            },
+            {
+              "facility_image": "https://theme.hstatic.net/1000340570/1000964732/14/icon-favorite.svg?v=3992",
+              "facility_name": "Free Parking"
+            },
+            {
+              "facility_image": "https://theme.hstatic.net/1000340570/1000964732/14/icon-favorite.svg?v=3992",
+              "facility_name": "Swimming Pool"
+            },
+            {
+              "facility_image": "https://theme.hstatic.net/1000340570/1000964732/14/icon-favorite.svg?v=3992",
+              "facility_name": "Gym"
+            },
+            {
+              "facility_image": "https://theme.hstatic.net/1000340570/1000964732/14/icon-favorite.svg?v=3992",
+              "facility_name": "Spa"
+            },
+            {
+              "facility_image": "https://theme.hstatic.net/1000340570/1000964732/14/icon-favorite.svg?v=3992",
+              "facility_name": "Restaurant"
+            },
+            {
+              "facility_image": "https://theme.hstatic.net/1000340570/1000964732/14/icon-favorite.svg?v=3992",
+              "facility_name": "Bar"
+            },
+            {
+              "facility_image": "https://theme.hstatic.net/1000340570/1000964732/14/icon-favorite.svg?v=3992",
+              "facility_name": "Laundry"
+            },
+            {
+              "facility_image": "https://theme.hstatic.net/1000340570/1000964732/14/icon-favorite.svg?v=3992",
+              "facility_name": "Room Service"
+            },
+            {
+              "facility_image": "https://theme.hstatic.net/1000340570/1000964732/14/icon-favorite.svg?v=3992",
+              "facility_name": "Airport Transfer"
+            }
+          ]
+        },
+        {
+          "id": 3,
+          "room_name": "Room 3",
+          "room_status": 1,
+          "room_price": 200,
+          "room_quantity": 2,
+          "room_type_name": "Standard",
+          "room_image": [
+            "https://img.freepik.com/free-photo/modern-spacious-room-with-large-panoramic-window_7502-7289.jpg?w=1380&t=st=1710141114~exp=1710141714~hmac=74692f396e2c090c66b23f27a14af3b6ba9e6819b76ccd2445b6d5c0582d260d",
+            "https://img.freepik.com/free-photo/modern-spacious-room-with-large-panoramic-window_7502-7289.jpg?w=1380&t=st=1710141114~exp=1710141714~hmac=74692f396e2c090c66b23f27a14af3b6ba9e6819b76ccd2445b6d5c0582d260d",
+            "https://img.freepik.com/free-photo/modern-spacious-room-with-large-panoramic-window_7502-7289.jpg?w=1380&t=st=1710141114~exp=1710141714~hmac=74692f396e2c090c66b23f27a14af3b6ba9e6819b76ccd2445b6d5c0582d260d"
+          ],
+          "room_facilities": [
+            {
+              "facility_image": "https://theme.hstatic.net/1000340570/1000964732/14/icon-favorite.svg?v=3992",
+              "facility_name": "Free Wifi"
+            },
+            {
+              "facility_image": "https://theme.hstatic.net/1000340570/1000964732/14/icon-favorite.svg?v=3992",
+              "facility_name": "Free Breakfast"
+            },
+            {
+              "facility_image": "https://theme.hstatic.net/1000340570/1000964732/14/icon-favorite.svg?v=3992",
+              "facility_name": "Free Parking"
+            },
+            {
+              "facility_image": "https://theme.hstatic.net/1000340570/1000964732/14/icon-favorite.svg?v=3992",
+              "facility_name": "Swimming Pool"
+            },
+            {
+              "facility_image": "https://theme.hstatic.net/1000340570/1000964732/14/icon-favorite.svg?v=3992",
+              "facility_name": "Gym"
+            },
+            {
+              "facility_image": "https://theme.hstatic.net/1000340570/1000964732/14/icon-favorite.svg?v=3992",
+              "facility_name": "Spa"
+            },
+            {
+              "facility_image": "https://theme.hstatic.net/1000340570/1000964732/14/icon-favorite.svg?v=3992",
+              "facility_name": "Restaurant"
+            },
+            {
+              "facility_image": "https://theme.hstatic.net/1000340570/1000964732/14/icon-favorite.svg?v=3992",
+              "facility_name": "Bar"
+            },
+            {
+              "facility_image": "https://theme.hstatic.net/1000340570/1000964732/14/icon-favorite.svg?v=3992",
+              "facility_name": "Laundry"
+            },
+            {
+              "facility_image": "https://theme.hstatic.net/1000340570/1000964732/14/icon-favorite.svg?v=3992",
+              "facility_name": "Room Service"
+            },
+            {
+              "facility_image": "https://theme.hstatic.net/1000340570/1000964732/14/icon-favorite.svg?v=3992",
+              "facility_name": "Airport Transfer"
+            }
+          ]
+        },
+        {
+          "id": 3,
+          "room_name": "Room 3",
+          "room_status": 1,
+          "room_price": 200,
+          "room_quantity": 2,
+          "room_type_name": "Standard",
+          "room_image": [
+            "https://img.freepik.com/free-photo/modern-spacious-room-with-large-panoramic-window_7502-7289.jpg?w=1380&t=st=1710141114~exp=1710141714~hmac=74692f396e2c090c66b23f27a14af3b6ba9e6819b76ccd2445b6d5c0582d260d",
+            "https://img.freepik.com/free-photo/modern-spacious-room-with-large-panoramic-window_7502-7289.jpg?w=1380&t=st=1710141114~exp=1710141714~hmac=74692f396e2c090c66b23f27a14af3b6ba9e6819b76ccd2445b6d5c0582d260d",
+            "https://img.freepik.com/free-photo/modern-spacious-room-with-large-panoramic-window_7502-7289.jpg?w=1380&t=st=1710141114~exp=1710141714~hmac=74692f396e2c090c66b23f27a14af3b6ba9e6819b76ccd2445b6d5c0582d260d"
+          ],
+          "room_facilities": [
+            {
+              "facility_image": "https://theme.hstatic.net/1000340570/1000964732/14/icon-favorite.svg?v=3992",
+              "facility_name": "Free Wifi"
+            },
+            {
+              "facility_image": "https://theme.hstatic.net/1000340570/1000964732/14/icon-favorite.svg?v=3992",
+              "facility_name": "Free Breakfast"
+            },
+            {
+              "facility_image": "https://theme.hstatic.net/1000340570/1000964732/14/icon-favorite.svg?v=3992",
+              "facility_name": "Free Parking"
+            },
+            {
+              "facility_image": "https://theme.hstatic.net/1000340570/1000964732/14/icon-favorite.svg?v=3992",
+              "facility_name": "Swimming Pool"
+            },
+            {
+              "facility_image": "https://theme.hstatic.net/1000340570/1000964732/14/icon-favorite.svg?v=3992",
+              "facility_name": "Gym"
+            },
+            {
+              "facility_image": "https://theme.hstatic.net/1000340570/1000964732/14/icon-favorite.svg?v=3992",
+              "facility_name": "Spa"
+            },
+            {
+              "facility_image": "https://theme.hstatic.net/1000340570/1000964732/14/icon-favorite.svg?v=3992",
+              "facility_name": "Restaurant"
+            },
+            {
+              "facility_image": "https://theme.hstatic.net/1000340570/1000964732/14/icon-favorite.svg?v=3992",
+              "facility_name": "Bar"
+            },
+            {
+              "facility_image": "https://theme.hstatic.net/1000340570/1000964732/14/icon-favorite.svg?v=3992",
+              "facility_name": "Laundry"
+            },
+            {
+              "facility_image": "https://theme.hstatic.net/1000340570/1000964732/14/icon-favorite.svg?v=3992",
+              "facility_name": "Room Service"
+            },
+            {
+              "facility_image": "https://theme.hstatic.net/1000340570/1000964732/14/icon-favorite.svg?v=3992",
+              "facility_name": "Airport Transfer"
+            }
+          ]
+        }
+      ],
+      "user": {
+        "id": 6,
+        "email": "user1@example.com",
+        "phone_number": "1234567890",
+        "fullname": "John Doe",
+        "font_id": "https://lawnet.vn/uploads/image/2020/10/14/mat-truoc.png",
+        "back_id": "https://cdn.luatvietnam.vn/uploaded/Images/Original/2020/12/03/cach-ghi-noi-cap-can-cuoc-cong-dan_0312135600.png"
+      }
+    },
+    {
+      "id": "5",
+      "hotel_name": "Burj Al Arab Jumeirah",
+      "hotel_address": "Jumeirah Beach Road, Dubai, United Arab Emirates",
+      "hotel_city": "Dubai",
+      "hotel_country": "United Arab Emirates",
+      "hotel_contact_number": "+971 4 301 7777",
+      "hotel_email": "info@burjalarab.com",
+      "hotel_description": "Burj Al Arab Jumeirah is a luxurious 7-star hotel located on its own island in Dubai, United Arab Emirates. It is known for its iconic sail-shaped structure and stunning views of the Arabian Gulf. The hotel offers opulent accommodations, world-class dining options, a spa, and a private beach. Guests can enjoy exclusive amenities and services, including a personal butler and chauffeur-driven Rolls-Royce. Burj Al Arab Jumeirah is a symbol of luxury and extravagance.",
+      "star_rating": "7",
+      "check_in_time": "15:00",
+      "check_out_time": "12:00",
+      "status": "await",
+      "minPrice": "$1000",
+      "user_id": 5
+    },
+    {
+      "id": "4",
+      "hotel_name": "The Plaza Hotel",
+      "hotel_address": "768 5th Ave, New York, NY 10019, United States",
+      "hotel_city": "New York",
+      "hotel_country": "United States",
+      "hotel_contact_number": "+1 212-759-3000",
+      "hotel_email": "info@theplazahotel.com",
+      "hotel_description": "The Plaza Hotel is a historic luxury hotel located in the heart of Manhattan, New York City. It offers elegant accommodations, fine dining options, a spa, and a fitness center. The hotel is known for its iconic architecture and rich history. It has been featured in numerous films and is a popular destination for celebrities and high-profile guests. The Plaza Hotel offers a luxurious and unforgettable experience for its guests.",
+      "star_rating": "5",
+      "check_in_time": "15:00",
+      "check_out_time": "12:00",
+      "status": "await",
+      "minPrice": "$500",
+      "user_id": 4
+    },
+    {
+      "id": "3",
+      "hotel_name": "The Ritz-Carlton, Hong Kong",
+      "hotel_address": "International Commerce Centre, 1 Austin Road West, Kowloon, Hong Kong",
+      "hotel_city": "Hong Kong",
+      "hotel_country": "China",
+      "hotel_contact_number": "+852 2263 2263",
+      "hotel_email": "info@ritzcarlton.com",
+      "hotel_description": "The Ritz-Carlton, Hong Kong is a luxurious 5-star hotel located in the International Commerce Centre in Kowloon, Hong Kong. It offers breathtaking views of the city and the Victoria Harbour. The hotel features elegant rooms, a rooftop bar, multiple dining options, a spa, and a fitness center. It is conveniently located near popular attractions such as the Hong Kong Observation Wheel and the Avenue of Stars. The Ritz-Carlton, Hong Kong is renowned for its impeccable service and world-class amenities.",
+      "star_rating": "5",
+      "check_in_time": "15:00",
+      "check_out_time": "12:00",
+      "status": "await",
+      "minPrice": "$400",
+      "user_id": 3
+    }
+  ],
+  "hotel-attachment": [
+    {
+      "AttachmentID": 1,
+      "id": "6"
+    },
+    {
+      "AttachmentID": 2,
+      "id": "7"
+    },
+    {
+      "AttachmentID": 3,
+      "id": "8"
+    }
+  ],
+  "attachment": [
+    {
+      "id": "1",
+      "FileUrl": "https://media.istockphoto.com/id/472899538/vi/anh/downtown-cleveland-hotel-entrance-and-ch%E1%BB%9D-taxi-cab.jpg?s=2048x2048&w=is&k=20&c=ug0dnw1uG7nlN2wc9crevoIKllZcwtsKngLnunwlySY="
+    },
+    {
+      "id": "2",
+      "FileUrl": "https://media.istockphoto.com/id/104731717/vi/anh/khu-ngh%E1%BB%89-d%C6%B0%E1%BB%A1ng-sang-tr%E1%BB%8Dng.jpg?s=2048x2048&w=is&k=20&c=6PmdGufkeXwrjSJ2GtXUKHFTHSAtNgtbQbxlVq_nFBw="
+    },
+    {
+      "id": "3",
+      "FileUrl": "https://media.istockphoto.com/id/104731717/vi/anh/khu-ngh%E1%BB%89-d%C6%B0%E1%BB%A1ng-sang-tr%E1%BB%8Dng.jpg?s=2048x2048&w=is&k=20&c=6PmdGufkeXwrjSJ2GtXUKHFTHSAtNgtbQbxlVq_nFBw="
+    }
+  ],
+  "facility-type": [
+    {
+      "id": "1",
+      "facility_type_name": "Room Configuration & Access"
+    },
+    {
+      "id": "2",
+      "facility_type_name": "Room Facilities"
+    },
+    {
+      "id": "3",
+      "facility_type_name": "Hotel Facilities"
+    },
+    {
+      "id": "4",
+      "facility_type_name": "Hotel Policy"
+    },
+    {
+      "id": "5",
+      "facility_type_name": "Hotel Image"
+    },
+    {
+      "id": "6",
+      "facility_type_name": "Hotel Attachment"
+    },
+    {
+      "id": "7",
+      "facility_type_name": "Room Image"
+    },
+    {
+      "id": "8",
+      "facility_type_name": "Room Facilities"
+    },
+    {
+      "id": "9",
+      "facility_type_name": "Room Policy"
+    },
+    {
+      "id": "10",
+      "facility_type_name": "Room Attachment"
+    },
+    {
+      "id": "11",
+      "facility_type_name": "Hotel Policy"
+    },
+    {
+      "id": "12",
+      "facility_type_name": "Hotel Attachment"
+    },
+    {
+      "id": "13",
+      "facility_type_name": "Room Image"
+    },
+    {
+      "id": "14",
+      "facility_type_name": "Room Facilities"
+    },
+    {
+      "id": "15",
+      "facility_type_name": "Room Policy"
+    },
+    {
+      "id": "16",
+      "facility_type_name": "Room Attachment"
+    },
+    {
+      "id": "17",
+      "facility_type_name": "Hotel Policy"
+    },
+    {
+      "id": "18",
+      "facility_type_name": "Hotel Attachment"
+    },
+    {
+      "id": "19",
+      "facility_type_name": "Room Image"
+    },
+    {
+      "id": "20",
+      "facility_type_name": "Room Facilities"
+    },
+    {
+      "id": "21",
+      "facility_type_name": "Room Policy"
+    },
+    {
+      "id": "22",
+      "facility_type_name": "Room Attachment"
+    },
+    {
+      "id": "23",
+      "facility_type_name": "Hotel Policy"
+    },
+    {
+      "id": "24",
+      "facility_type_name": "Hotel Attachment"
+    },
+    {
+      "id": "25",
+      "facility_type_name": "Room Image"
+    },
+    {
+      "id": "26",
+      "facility_type_name": "Room Facilities"
+    },
+    {
+      "id": "27",
+      "facility_type_name": "Room Policy"
+    },
+    {
+      "id": "28",
+      "facility_type_name": "Room Attachment"
+    },
+    {
+      "id": "29",
+      "facility_type_name": "Hotel Policy"
+    },
+    {
+      "id": "30",
+      "facility_type_name": "Hotel Attachment"
+    },
+    {
+      "id": "31",
+      "facility_type_name": "Room Image"
+    },
+    {
+      "id": "32",
+      "facility_type_name": "Room Facilities"
+    },
+    {
+      "id": "33",
+      "facility_type_name": "Room Policy"
+    },
+    {
+      "id": "34",
+      "facility_type_name": "Room Attachment"
+    },
+    {
+      "id": "35",
+      "facility_type_name": "Hotel Policy"
+    },
+    {
+      "id": "36",
+      "facility_type_name": "Hotel Attachment"
+    },
+    {
+      "id": "37",
+      "facility_type_name": "Room Image"
+    },
+    {
+      "id": "38",
+      "facility_type_name": "Room Facilities"
+    },
+    {
+      "id": "39",
+      "facility_type_name": "Room Policy"
+    },
+    {
+      "id": "40",
+      "facility_type_name": "Room Attachment"
+    },
+    {
+      "id": "0d09",
+      "facility_type_name": "New Facility Type"
+    }
+  ]
+}
