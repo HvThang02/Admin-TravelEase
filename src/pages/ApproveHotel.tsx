@@ -133,91 +133,102 @@ export default function ApproveHotel() {
   };
 
   return (
-    <div className=" bg-secondary h-[max-content] w-full flex">
+    <>
       <Header pageTitle="Approve Hotel" />
-      <SideBar />
 
-      <div className=" bg-white w-[179vh] h-fit mt-[12vh] ml-[27vh] mb-[2vh] px-10 py-5">
-        <p className=" w-full  text-2xl">Approve Hotel</p>
-        <div className="flex flex-col">
-          <div className="overflow-x-auto sm:-mx-6 lg:-mx-8">
-            <div className="inline-block min-w-full py-4 sm:px-6 lg:px-8">
-              <div className="overflow-hidden">
-                <table className="min-w-full">
-                  <TableHeader headers={headers} />
-                  <tbody>
-                    {paginatedData.map((item, index) => (
-                      <tr className=" border-stroke border-[1px]" key={index}>
-                        <TableImage data={item.FileUrl} />
-                        <TableRow
-                          data={item.hotel_name}
-                          onClick={() => handleDetailApprove(item.id)}
-                        />
-                        <TableRow data={item.hotel_email} onClick={undefined} />
-                        <TableRow
-                          data={item.hotel_contact_number}
-                          onClick={undefined}
-                        />
-                        <TableRow
-                          data={item.room_quantity}
-                          onClick={undefined}
-                        />
-                        <td className="px-6 py-4 text-sm font-normal text-black ">
-                          <div className="flex justify-between">
-                            <ActionButton
-                              Icon={CiCircleCheck}
-                              buttonText="Approve"
-                              onClick={() => console.log("Approve clicked")}
+      <div className="flex">
+        <SideBar />
+        <div className=" bg-secondary h-fit p-5 w-full pl-[240px] pt-[90px]">
+          <div className=" bg-white p-6">
+            <p className=" w-full  text-2xl">Approve Hotel</p>
+            <div className="flex flex-col">
+              <div className="overflow-x-auto sm:-mx-6 lg:-mx-8">
+                <div className="inline-block min-w-full py-4 sm:px-6 lg:px-8">
+                  <div className="overflow-hidden">
+                    <table className="min-w-full">
+                      <TableHeader headers={headers} />
+                      <tbody>
+                        {paginatedData.map((item, index) => (
+                          <tr
+                            className=" border-stroke border-[1px]"
+                            key={index}
+                          >
+                            <TableImage data={item.FileUrl} />
+                            <TableRow
+                              data={item.hotel_name}
+                              onClick={() => handleDetailApprove(item.id)}
                             />
-                            <ActionButton
-                              Icon={CiCircleRemove}
-                              buttonText="Reject"
-                              onClick={() => console.log("Reject clicked")}
+                            <TableRow
+                              data={item.hotel_email}
+                              onClick={undefined}
                             />
-                          </div>
-                        </td>
-                      </tr>
-                    ))}
-                  </tbody>
-                </table>
+                            <TableRow
+                              data={item.hotel_contact_number}
+                              onClick={undefined}
+                            />
+                            <TableRow
+                              data={item.room_quantity}
+                              onClick={undefined}
+                            />
+                            <td className="px-6 py-4 text-sm font-normal text-black ">
+                              <div className="flex justify-between">
+                                <ActionButton
+                                  Icon={CiCircleCheck}
+                                  buttonText="Approve"
+                                  onClick={() => console.log("Approve clicked")}
+                                />
+                                <ActionButton
+                                  Icon={CiCircleRemove}
+                                  buttonText="Reject"
+                                  onClick={() => console.log("Reject clicked")}
+                                />
+                              </div>
+                            </td>
+                          </tr>
+                        ))}
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              </div>
+              <div className=" flex justify-end ">
+                <button
+                  onClick={() => handlePageChange(currentPage - 1)}
+                  disabled={currentPage === 0}
+                  className=" text-xs border-[1px] border-stroke text-black py-2 px-4 rounded-md mx-1 hover:bg-gray_bg"
+                >
+                  Back
+                </button>
+
+                {Array(Math.ceil(dataHotel.length / ITEMS_PER_PAGE))
+                  .fill(null)
+                  .map((_, index) => (
+                    <button
+                      key={index}
+                      onClick={() => handlePageChange(index)}
+                      className={` text-xs border-[1px] border-stroke text-black py-2 px-4 rounded-md mx-1 hover:bg-gray_bg ${
+                        index === currentPage ? "bg-gray_bg" : ""
+                      }`}
+                    >
+                      {index + 1}
+                    </button>
+                  ))}
+
+                <button
+                  onClick={() => handlePageChange(currentPage + 1)}
+                  disabled={
+                    currentPage ===
+                    Math.ceil(dataHotel.length / ITEMS_PER_PAGE) - 1
+                  }
+                  className="text-xs border-[1px] border-stroke text-black py-2 px-4 rounded-md mx-1 hover:bg-gray_bg "
+                >
+                  Next
+                </button>
               </div>
             </div>
           </div>
-          <div className=" flex justify-end ">
-            <button
-              onClick={() => handlePageChange(currentPage - 1)}
-              disabled={currentPage === 0}
-              className=" text-xs border-[1px] border-stroke text-black py-2 px-4 rounded-md mx-1 hover:bg-gray_bg"
-            >
-              Back
-            </button>
-
-            {Array(Math.ceil(dataHotel.length / ITEMS_PER_PAGE))
-              .fill(null)
-              .map((_, index) => (
-                <button
-                  key={index}
-                  onClick={() => handlePageChange(index)}
-                  className={` text-xs border-[1px] border-stroke text-black py-2 px-4 rounded-md mx-1 hover:bg-gray_bg ${
-                    index === currentPage ? "bg-gray_bg" : ""
-                  }`}
-                >
-                  {index + 1}
-                </button>
-              ))}
-
-            <button
-              onClick={() => handlePageChange(currentPage + 1)}
-              disabled={
-                currentPage === Math.ceil(dataHotel.length / ITEMS_PER_PAGE) - 1
-              }
-              className="text-xs border-[1px] border-stroke text-black py-2 px-4 rounded-md mx-1 hover:bg-gray_bg "
-            >
-              Next
-            </button>
-          </div>
         </div>
       </div>
-    </div>
+    </>
   );
 }

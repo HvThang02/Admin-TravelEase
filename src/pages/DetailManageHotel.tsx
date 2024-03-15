@@ -6,8 +6,7 @@ import SideBar from "../components/SideBar";
 import Header from "../components/Header";
 
 import { Tooltip } from "react-tooltip";
-
-export default function DetailApproveHotel() {
+export default function DetailManageHotel() {
   const { id } = useParams();
   const [dataHotel, setDataHotel] = useState({
     hotel_name: "",
@@ -37,7 +36,7 @@ export default function DetailApproveHotel() {
   useEffect(() => {
     const fetchHotel = async () => {
       try {
-        const response = await axios.get(`${api}/approve-hotels/${id}`);
+        const response = await axios.get(`${api}/manage-hotel/${id}`);
         const data = response.data;
         setDataHotel(data);
       } catch (error) {

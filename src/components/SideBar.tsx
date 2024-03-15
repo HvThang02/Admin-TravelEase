@@ -29,19 +29,39 @@ export default function SideBar() {
   const handlePageChangeFacilityType = () => {
     navigate(RoutePaths.FACILITY_TYPE);
   };
+
+  const handlePageChangeHotelFacility = () => {
+    navigate(RoutePaths.HOTEL_FACILITY);
+  };
+  const handlePageChangeRoomFacility = () => {
+    navigate(RoutePaths.ROOM_FACILITY);
+  };
+
+  const handlePageChangeDashboard = () => {
+    navigate(RoutePaths.DASHBOARD);
+  };
+
+  const handlePageChangeManageAccount = () => {
+    navigate(RoutePaths.MANAGE_ACCOUNT);
+  };
+
+  const handlePageChangeManageHotel = () => {
+    navigate(RoutePaths.MANAGE_HOTEL);
+  };
   return (
-    <div className="bg-white text-black w-[25vh] h-screen drop-shadow-md fixed z-10">
-      <ul className="p-2 pt-[12vh] space-y-2">
+    <aside className="bg-white text-black w-[220px] fixed drop-shadow-md z-10 pt-[75px] h-full">
+      <ul className="p-2 space-y-2 ">
         <li
           className={`${
             location.pathname === RoutePaths.DASHBOARD
               ? "bg-secondary text-primary"
               : ""
           } py-2 px-4 hover:bg-secondary hover:text-primary cursor-pointer`}
+          onClick={handlePageChangeDashboard}
         >
           <div className="flex items-center space-x-3">
             <MdOutlineSpaceDashboard />
-            <p>Dashboard</p>
+            <p className="text-[2vh]">Dashboard</p>
           </div>
         </li>
         <li
@@ -54,17 +74,22 @@ export default function SideBar() {
         >
           <div className="flex items-center space-x-3">
             <IoMdCheckboxOutline />
-            <p>Approve Hotel</p>
+            <p className="text-[2vh]">Approve Hotel</p>
           </div>
         </li>
 
         <li
-          className="py-2 px-4 hover:bg-secondary hover:text-primary cursor-pointer flex items-center justify-between"
+          className={`${
+            location.pathname == RoutePaths.MANAGE_ACCOUNT ||
+            location.pathname == RoutePaths.MANAGE_HOTEL
+              ? "bg-secondary text-primary"
+              : ""
+          } py-2 px-4 hover:bg-secondary hover:text-primary cursor-pointer flex items-center justify-between`}
           onClick={toggleManage}
         >
           <div className="flex items-center space-x-3">
             <MdManageSearch />
-            <p>Manage</p>
+            <p className="text-[2vh]">Manage</p>
           </div>
           <MdKeyboardArrowRight
             className={`transition-transform transform ${
@@ -75,10 +100,24 @@ export default function SideBar() {
 
         {isManageOpen && (
           <ul className="ml-12 ">
-            <li className="pb-2 pt-1 hover:text-primary cursor-pointer text-sm">
+            <li
+              className={`${
+                location.pathname.startsWith(RoutePaths.MANAGE_HOTEL)
+                  ? " text-primary"
+                  : ""
+              } pb-2 pt-1 hover:text-primary cursor-pointer text-sm`}
+              onClick={handlePageChangeManageHotel}
+            >
               Hotel
             </li>
-            <li className="pb-2 pt-1 hover:text-primary cursor-pointer text-sm">
+            <li
+              className={`${
+                location.pathname.startsWith(RoutePaths.MANAGE_ACCOUNT)
+                  ? " text-primary"
+                  : ""
+              } pb-2 pt-1 hover:text-primary cursor-pointer text-sm`}
+              onClick={handlePageChangeManageAccount}
+            >
               Account
             </li>
           </ul>
@@ -86,7 +125,8 @@ export default function SideBar() {
 
         <li
           className={`${
-            location.pathname === RoutePaths.FACILITY_TYPE
+            location.pathname == RoutePaths.FACILITY_TYPE ||
+            location.pathname == RoutePaths.HOTEL_FACILITY
               ? "bg-secondary text-primary"
               : ""
           } py-2 px-4 hover:bg-secondary hover:text-primary cursor-pointer flex items-center justify-between`}
@@ -94,7 +134,7 @@ export default function SideBar() {
         >
           <div className="flex items-center space-x-3">
             <CiBoxList />
-            <p>Facility</p>
+            <p className="text-[2vh]">Facility</p>
           </div>
           <MdKeyboardArrowRight
             className={`transition-transform transform ${
@@ -115,15 +155,29 @@ export default function SideBar() {
             >
               Facility Type
             </li>
-            <li className="pb-2 pt-1 hover:text-primary cursor-pointer text-sm">
+            <li
+              className={`${
+                location.pathname.startsWith(RoutePaths.HOTEL_FACILITY)
+                  ? " text-primary"
+                  : ""
+              } pb-2 pt-1 hover:text-primary cursor-pointer text-sm`}
+              onClick={handlePageChangeHotelFacility}
+            >
               Hotel Facility
             </li>
-            <li className="pb-2 pt-1 hover:text-primary cursor-pointer text-sm">
+            <li
+              className={`${
+                location.pathname.startsWith(RoutePaths.ROOM_FACILITY)
+                  ? " text-primary"
+                  : ""
+              } pb-2 pt-1 hover:text-primary cursor-pointer text-sm`}
+              onClick={handlePageChangeRoomFacility}
+            >
               Room Facility
             </li>
           </ul>
         )}
       </ul>
-    </div>
+    </aside>
   );
 }
