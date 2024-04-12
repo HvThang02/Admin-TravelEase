@@ -1,0 +1,242 @@
+"approve-hotels": [
+    {
+      "id": "6",
+      "hotel_name": "Hotel Adlon Kempinski Berlin",
+      "hotel_address": "Unter den Linden 77, 10117 Berlin, Germany",
+      "hotel_city": "Berlin",
+      "hotel_country": "Germany",
+      "hotel_contact_number": "+49 30 22610",
+      "hotel_email": "info@hoteladlon.com",
+      "hotel_description": "Hotel Adlon Kempinski Berlin is a historic 5-star hotel located in the heart of Berlin, Germany. It is situated near popular attractions such as Brandenburg Gate and the Berlin Wall. The hotel offers luxurious rooms, fine dining options, a spa, and a fitness center. It has a rich history and has hosted numerous celebrities and dignitaries. Hotel Adlon Kempinski Berlin provides a blend of modern luxury and old-world charm.",
+      "check_in_time": "15:00",
+      "check_out_time": "12:00",
+      "status": "await",
+      "minPrice": "$400",
+      "hotel_policy": "",
+      "hotel_image": [
+        "https://img.freepik.com/free-photo/modern-spacious-room-with-large-panoramic-window_7502-7289.jpg?w=1380&t=st=1710141114~exp=1710141714~hmac=74692f396e2c090c66b23f27a14af3b6ba9e6819b76ccd2445b6d5c0582d260d",
+        "https://img.freepik.com/free-photo/modern-spacious-room-with-large-panoramic-window_7502-7289.jpg?w=1380&t=st=1710141114~exp=1710141714~hmac=74692f396e2c090c66b23f27a14af3b6ba9e6819b76ccd2445b6d5c0582d260d",
+        "https://img.freepik.com/free-photo/modern-spacious-room-with-large-panoramic-window_7502-7289.jpg?w=1380&t=st=1710141114~exp=1710141714~hmac=74692f396e2c090c66b23f27a14af3b6ba9e6819b76ccd2445b6d5c0582d260d"
+      ],
+      "hotel_facilities": [
+        {
+          "facility_image": "https://theme.hstatic.net/1000340570/1000964732/14/icon-favorite.svg?v=3992",
+          "facility_name": "Free Wifi"
+        },
+        {
+          "facility_image": "https://theme.hstatic.net/1000340570/1000964732/14/icon-favorite.svg?v=3992",
+          "facility_name": "Free Breakfast"
+        }
+      ],
+      "rooms": [
+        {
+          "id": 1,
+          "room_name": "Room 1",
+          "room_status": 1,
+          "room_price": 100,
+          "room_quantity": 5,
+          "room_type_name": "Standard",
+          "room_image": [
+            "https://img.freepik.com/free-photo/modern-spacious-room-with-large-panoramic-window_7502-7289.jpg?w=1380&t=st=1710141114~exp=1710141714~hmac=74692f396e2c090c66b23f27a14af3b6ba9e6819b76ccd2445b6d5c0582d260d",
+            "https://img.freepik.com/free-photo/modern-spacious-room-with-large-panoramic-window_7502-7289.jpg?w=1380&t=st=1710141114~exp=1710141714~hmac=74692f396e2c090c66b23f27a14af3b6ba9e6819b76ccd2445b6d5c0582d260d",
+            "https://img.freepik.com/free-photo/modern-spacious-room-with-large-panoramic-window_7502-7289.jpg?w=1380&t=st=1710141114~exp=1710141714~hmac=74692f396e2c090c66b23f27a14af3b6ba9e6819b76ccd2445b6d5c0582d260d"
+          ],
+          "room_facilities": [
+            {
+              "facility_image": "https://theme.hstatic.net/1000340570/1000964732/14/icon-favorite.svg?v=3992",
+              "facility_name": "Free Wifi"
+            },
+            {
+              "facility_image": "https://theme.hstatic.net/1000340570/1000964732/14/icon-favorite.svg?v=3992",
+              "facility_name": "Free Breakfast"
+            }
+          ]
+        },
+        {
+          "id": 2,
+          "room_name": "Room 2",
+          "room_status": 0,
+          "room_price": 150,
+          "room_quantity": 3,
+          "room_type_name": "Deluxe",
+          "room_image": [
+            "https://img.freepik.com/free-photo/modern-spacious-room-with-large-panoramic-window_7502-7289.jpg?w=1380&t=st=1710141114~exp=1710141714~hmac=74692f396e2c090c66b23f27a14af3b6ba9e6819b76ccd2445b6d5c0582d260d",
+            "https://img.freepik.com/free-photo/modern-spacious-room-with-large-panoramic-window_7502-7289.jpg?w=1380&t=st=1710141114~exp=1710141714~hmac=74692f396e2c090c66b23f27a14af3b6ba9e6819b76ccd2445b6d5c0582d260d",
+            "https://img.freepik.com/free-photo/modern-spacious-room-with-large-panoramic-window_7502-7289.jpg?w=1380&t=st=1710141114~exp=1710141714~hmac=74692f396e2c090c66b23f27a14af3b6ba9e6819b76ccd2445b6d5c0582d260d"
+          ],
+          "room_facilities": [
+            {
+              "facility_image": "https://theme.hstatic.net/1000340570/1000964732/14/icon-favorite.svg?v=3992",
+              "facility_name": "Free Wifi"
+            },
+            {
+              "facility_image": "https://theme.hstatic.net/1000340570/1000964732/14/icon-favorite.svg?v=3992",
+              "facility_name": "Free Breakfast"
+            },
+            {
+              "facility_image": "https://theme.hstatic.net/1000340570/1000964732/14/icon-favorite.svg?v=3992",
+              "facility_name": "Free Parking"
+            },
+            {
+              "facility_image": "https://theme.hstatic.net/1000340570/1000964732/14/icon-favorite.svg?v=3992",
+              "facility_name": "Swimming Pool"
+            },
+            {
+              "facility_image": "https://theme.hstatic.net/1000340570/1000964732/14/icon-favorite.svg?v=3992",
+              "facility_name": "Gym"
+            },
+            {
+              "facility_image": "https://theme.hstatic.net/1000340570/1000964732/14/icon-favorite.svg?v=3992",
+              "facility_name": "Spa"
+            },
+            {
+              "facility_image": "https://theme.hstatic.net/1000340570/1000964732/14/icon-favorite.svg?v=3992",
+              "facility_name": "Restaurant"
+            },
+            {
+              "facility_image": "https://theme.hstatic.net/1000340570/1000964732/14/icon-favorite.svg?v=3992",
+              "facility_name": "Bar"
+            },
+            {
+              "facility_image": "https://theme.hstatic.net/1000340570/1000964732/14/icon-favorite.svg?v=3992",
+              "facility_name": "Laundry"
+            },
+            {
+              "facility_image": "https://theme.hstatic.net/1000340570/1000964732/14/icon-favorite.svg?v=3992",
+              "facility_name": "Room Service"
+            },
+            {
+              "facility_image": "https://theme.hstatic.net/1000340570/1000964732/14/icon-favorite.svg?v=3992",
+              "facility_name": "Airport Transfer"
+            }
+          ]
+        },
+        {
+          "id": 3,
+          "room_name": "Room 3",
+          "room_status": 1,
+          "room_price": 200,
+          "room_quantity": 2,
+          "room_type_name": "Standard",
+          "room_image": [
+            "https://img.freepik.com/free-photo/modern-spacious-room-with-large-panoramic-window_7502-7289.jpg?w=1380&t=st=1710141114~exp=1710141714~hmac=74692f396e2c090c66b23f27a14af3b6ba9e6819b76ccd2445b6d5c0582d260d",
+            "https://img.freepik.com/free-photo/modern-spacious-room-with-large-panoramic-window_7502-7289.jpg?w=1380&t=st=1710141114~exp=1710141714~hmac=74692f396e2c090c66b23f27a14af3b6ba9e6819b76ccd2445b6d5c0582d260d",
+            "https://img.freepik.com/free-photo/modern-spacious-room-with-large-panoramic-window_7502-7289.jpg?w=1380&t=st=1710141114~exp=1710141714~hmac=74692f396e2c090c66b23f27a14af3b6ba9e6819b76ccd2445b6d5c0582d260d"
+          ],
+          "room_facilities": [
+            {
+              "facility_image": "https://theme.hstatic.net/1000340570/1000964732/14/icon-favorite.svg?v=3992",
+              "facility_name": "Free Wifi"
+            },
+            {
+              "facility_image": "https://theme.hstatic.net/1000340570/1000964732/14/icon-favorite.svg?v=3992",
+              "facility_name": "Free Breakfast"
+            },
+            {
+              "facility_image": "https://theme.hstatic.net/1000340570/1000964732/14/icon-favorite.svg?v=3992",
+              "facility_name": "Free Parking"
+            },
+            {
+              "facility_image": "https://theme.hstatic.net/1000340570/1000964732/14/icon-favorite.svg?v=3992",
+              "facility_name": "Swimming Pool"
+            },
+            {
+              "facility_image": "https://theme.hstatic.net/1000340570/1000964732/14/icon-favorite.svg?v=3992",
+              "facility_name": "Gym"
+            },
+            {
+              "facility_image": "https://theme.hstatic.net/1000340570/1000964732/14/icon-favorite.svg?v=3992",
+              "facility_name": "Spa"
+            },
+            {
+              "facility_image": "https://theme.hstatic.net/1000340570/1000964732/14/icon-favorite.svg?v=3992",
+              "facility_name": "Restaurant"
+            },
+            {
+              "facility_image": "https://theme.hstatic.net/1000340570/1000964732/14/icon-favorite.svg?v=3992",
+              "facility_name": "Bar"
+            },
+            {
+              "facility_image": "https://theme.hstatic.net/1000340570/1000964732/14/icon-favorite.svg?v=3992",
+              "facility_name": "Laundry"
+            },
+            {
+              "facility_image": "https://theme.hstatic.net/1000340570/1000964732/14/icon-favorite.svg?v=3992",
+              "facility_name": "Room Service"
+            },
+            {
+              "facility_image": "https://theme.hstatic.net/1000340570/1000964732/14/icon-favorite.svg?v=3992",
+              "facility_name": "Airport Transfer"
+            }
+          ]
+        },
+        {
+          "id": 3,
+          "room_name": "Room 3",
+          "room_status": 1,
+          "room_price": 200,
+          "room_quantity": 2,
+          "room_type_name": "Standard",
+          "room_image": [
+            "https://img.freepik.com/free-photo/modern-spacious-room-with-large-panoramic-window_7502-7289.jpg?w=1380&t=st=1710141114~exp=1710141714~hmac=74692f396e2c090c66b23f27a14af3b6ba9e6819b76ccd2445b6d5c0582d260d",
+            "https://img.freepik.com/free-photo/modern-spacious-room-with-large-panoramic-window_7502-7289.jpg?w=1380&t=st=1710141114~exp=1710141714~hmac=74692f396e2c090c66b23f27a14af3b6ba9e6819b76ccd2445b6d5c0582d260d",
+            "https://img.freepik.com/free-photo/modern-spacious-room-with-large-panoramic-window_7502-7289.jpg?w=1380&t=st=1710141114~exp=1710141714~hmac=74692f396e2c090c66b23f27a14af3b6ba9e6819b76ccd2445b6d5c0582d260d"
+          ],
+          "room_facilities": [
+            {
+              "facility_image": "https://theme.hstatic.net/1000340570/1000964732/14/icon-favorite.svg?v=3992",
+              "facility_name": "Free Wifi"
+            },
+            {
+              "facility_image": "https://theme.hstatic.net/1000340570/1000964732/14/icon-favorite.svg?v=3992",
+              "facility_name": "Free Breakfast"
+            },
+            {
+              "facility_image": "https://theme.hstatic.net/1000340570/1000964732/14/icon-favorite.svg?v=3992",
+              "facility_name": "Free Parking"
+            },
+            {
+              "facility_image": "https://theme.hstatic.net/1000340570/1000964732/14/icon-favorite.svg?v=3992",
+              "facility_name": "Swimming Pool"
+            },
+            {
+              "facility_image": "https://theme.hstatic.net/1000340570/1000964732/14/icon-favorite.svg?v=3992",
+              "facility_name": "Gym"
+            },
+            {
+              "facility_image": "https://theme.hstatic.net/1000340570/1000964732/14/icon-favorite.svg?v=3992",
+              "facility_name": "Spa"
+            },
+            {
+              "facility_image": "https://theme.hstatic.net/1000340570/1000964732/14/icon-favorite.svg?v=3992",
+              "facility_name": "Restaurant"
+            },
+            {
+              "facility_image": "https://theme.hstatic.net/1000340570/1000964732/14/icon-favorite.svg?v=3992",
+              "facility_name": "Bar"
+            },
+            {
+              "facility_image": "https://theme.hstatic.net/1000340570/1000964732/14/icon-favorite.svg?v=3992",
+              "facility_name": "Laundry"
+            },
+            {
+              "facility_image": "https://theme.hstatic.net/1000340570/1000964732/14/icon-favorite.svg?v=3992",
+              "facility_name": "Room Service"
+            },
+            {
+              "facility_image": "https://theme.hstatic.net/1000340570/1000964732/14/icon-favorite.svg?v=3992",
+              "facility_name": "Airport Transfer"
+            }
+          ]
+        }
+      ],
+      "user": {
+        "id": 6,
+        "email": "user1@example.com",
+        "phone_number": "1234567890",
+        "fullname": "John Doe",
+        "font_id": "https://lawnet.vn/uploads/image/2020/10/14/mat-truoc.png",
+        "back_id": "https://cdn.luatvietnam.vn/uploaded/Images/Original/2020/12/03/cach-ghi-noi-cap-can-cuoc-cong-dan_0312135600.png"
+      }
+    },
+]

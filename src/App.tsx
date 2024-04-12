@@ -15,8 +15,8 @@ export default function App() {
   return (
     <Routes>
       <Route path="/" element={<Login />} />
-      <Route path="/approve-hotel/:id" element={<DetailHotel />} />
-      <Route path="/approve-hotel" element={<ApproveHotel />} />
+      <Route path="/approval-hotel/:hotel_id" element={<DetailHotel />} />
+      <Route path="/approval-hotel" element={<ApproveHotel />} />
       <Route path="/facility-type" element={<FacilityType />} />
       <Route path="/hotel-facility" element={<HotelFacility />} />
       <Route path="/room-facility" element={<RoomFacility />} />

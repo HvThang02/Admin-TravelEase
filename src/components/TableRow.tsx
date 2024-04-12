@@ -3,7 +3,10 @@ import React from "react";
 
 export default function TableRow({ data, onClick }) {
   return (
-    <td className="px-6 py-4 text-sm font-normal text-black " onClick={onClick}>
+    <td
+      className="px-6 py-4 text-sm font-normal text-black cursor-pointer "
+      onClick={onClick}
+    >
       {data}
     </td>
   );

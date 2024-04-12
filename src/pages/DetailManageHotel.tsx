@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { useParams } from "react-router-dom";
-import { api } from "../configs/Api";
+import { api } from "../constants/api";
 import SideBar from "../components/SideBar";
 import Header from "../components/Header";
 
@@ -53,8 +53,7 @@ export default function DetailManageHotel() {
 
   return (
     <>
-      <Header pageTitle="Approve Hotel" />
-
+      <Header pageTitle="Manage Hotel" />
       <div className="flex">
         <SideBar />
         <div className=" bg-secondary h-fit p-5 w-full pl-[240px] pt-[90px]">

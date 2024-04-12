@@ -3808,12 +3808,20 @@
       "hotel_facility_name": "123",
       "hotel_facility_icon": "https://theme.hstatic.net/1000340570/1000964732/14/icon-favorite.svg?v=3992",
       "facility_type_name": "Hotel Policy"
+    },
+    {
+      "id": "9dfd",
+      "hotel_facility_name": "",
+      "hotel_facility_icon": "https://theme.hstatic.net/1000340570/1000964732/14/icon-favorite.svg?v=3992",
+      "facility_type_name": "Hotel Image"
     }
   ],
   "room-facility": [
     {
       "id": "3",
-      "room_facility_name": "room Facilities"
+      "room_facility_icon": "https://theme.hstatic.net/1000340570/1000964732/14/icon-favorite.svg?v=3992",
+      "room_facility_name": "room Facilities",
+      "facility_type_name": "Hotel Attachment"
     },
     {
       "id": "4",

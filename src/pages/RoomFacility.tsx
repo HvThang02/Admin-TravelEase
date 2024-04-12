@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import Header from "../components/Header";
 import SideBar from "../components/SideBar";
 import axios from "axios";
-import { api } from "../configs/Api";
+import { api } from "../constants/api";
 import { CiSearch, CiCirclePlus } from "react-icons/ci";
 import { HiOutlineTrash } from "react-icons/hi2";
 
@@ -240,12 +240,14 @@ export default function RoomFacility() {
                               <div className="flex gap-2">
                                 <div>{item.room_facility_name}</div>
                                 <span>-</span>
-                                <div>{item.facility_type_name}</div>
+                                {/* <div>{item.facility_type_name}</div> */}
+                                <div>Hotel Attachment</div>
                               </div>
                             }
                             avatar={
                               <img
-                                src={item.room_facility_icon}
+                                // src={item.room_facility_icon}
+                                src="https://theme.hstatic.net/1000340570/1000964732/14/icon-favorite.svg?v=3992"
                                 alt={item.id}
                               />
                             }

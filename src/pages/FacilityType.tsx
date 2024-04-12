@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import Header from "../components/Header";
 import SideBar from "../components/SideBar";
 import axios from "axios";
-import { api } from "../configs/Api";
+import { api } from "../constants/api";
 import { HiOutlineTrash } from "react-icons/hi2";
 import { CiSearch } from "react-icons/ci";
 

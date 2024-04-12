@@ -1,6 +1,6 @@
-export const RoutePaths = {
+export const routePaths = {
   LOGIN: "/login",
-  APPROVE_HOTEL: "/approve-hotel",
+  APPROVE_HOTEL: "/approval-hotel",
   DASHBOARD: "/dashboard",
   FACILITY_TYPE: "/facility-type",
   HOTEL_FACILITY: "/hotel-facility",

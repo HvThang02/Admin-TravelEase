@@ -1,7 +1,7 @@
 import React from "react";
 import { MdOutlineEmail, MdLockOutline } from "react-icons/md";
 import { useNavigate } from "react-router-dom";
-import { RoutePaths } from "../configs/RoutePaths";
+import { routePaths } from "../constants/routePaths";
 
 const logo = "./src/assets/logo.png";
 
@@ -9,7 +9,7 @@ export default function Login() {
   const navigate = useNavigate();
 
   const handleSignIn = () => {
-    navigate(RoutePaths.APPROVE_HOTEL);
+    navigate(routePaths.APPROVE_HOTEL);
   };
 
   return (

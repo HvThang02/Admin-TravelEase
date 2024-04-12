@@ -6,7 +6,7 @@ import TableRow from "../components/TableRow";
 import TableImage from "../components/TableImage";
 import { CiCircleCheck, CiCircleRemove } from "react-icons/ci";
 import ActionButton from "../components/TableButton";
-import { api } from "../configs/Api";
+import { api } from "../constants/api";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 
@@ -16,82 +16,86 @@ const headers = ["Image", "Name", "Email", "Phone", "Number of room", "Action"];
 
 export default function ApproveHotel() {
   const [currentPage, setCurrentPage] = useState(0);
-  const [dataHotel, setDataHotel] = useState<
+  const [dataHotel, setDataHotel] = useState([
     {
-      id: string;
-      status: string;
-      hotel_contact_number: any;
-      hotel_email: any;
-      hotel_name: string;
-    }[]
-  >([]);
+      hotel_id: "",
+      hotel_name: "",
+      hotel_email: "",
+      hotel_address: "",
+      number_of_rooms: "",
+      hotel_contact_number: "",
+      hotel_images: "",
+    },
+  ]);
 
-  const [attachment, setAttachment] = useState<
-    {
-      AttachmentID: string;
-      FileUrl: string;
-    }[]
-  >([]);
+  // const [attachment, setAttachment] = useState<
+  //   {
+  //     AttachmentID: string;
+  //     FileUrl: string;
+  //   }[]
+  // >([]);
 
-  const [hotelAttachment, setHotelAttachment] = useState<
-    {
-      id: string;
-      AttachmentID: string;
-      hotel_id: string;
-    }[]
-  >([]);
+  // const [hotelAttachment, setHotelAttachment] = useState<
+  //   {
+  //     id: string;
+  //     AttachmentID: string;
+  //     hotel_id: string;
+  //   }[]
+  // >([]);
 
-  const [rooms, setRooms] = useState<
-    {
-      id: string;
-      room_quantity: number;
-      hotel_id: string;
-    }[]
-  >([]);
+  // const [rooms, setRooms] = useState<
+  //   {
+  //     id: string;
+  //     room_quantity: number;
+  //     hotel_id: string;
+  //   }[]
+  // >([]);
 
   useEffect(() => {
     const fetchDataHotel = async () => {
       try {
-        const response = await axios.get(`${api}/approve-hotels`);
+        const response = await axios.get(`${api}/approval-hotel`);
         const data = await response.data;
+        console.log(data);
         setDataHotel(data);
       } catch (error) {
         console.error("Error:", error);
       }
     };
 
-    const fetchAttachment = async () => {
-      try {
-        const response = await axios.get(`${api}/attachment`);
-        const data = await response.data;
-        setAttachment(data);
-      } catch (error) {
-        console.error("Error:", error);
-      }
-    };
+    // const fetchAttachment = async () => {
+    //   try {
+    //     const response = await axios.get(`${api}/attachment`);
+    //     const data = await response.data;
+    //     setAttachment(data);
+    //   } catch (error) {
+    //     console.error("Error:", error);
+    //   }
+    // };
 
-    const fetchHotelAttachment = async () => {
-      try {
-        const response = await axios.get(`${api}/hotel-attachment`);
-        const data = await response.data;
-        setHotelAttachment(data);
-      } catch (error) {
-        console.error("Error:", error);
-      }
-    };
+    // const fetchHotelAttachment = async () => {
+    //   try {
+    //     const response = await axios.get(`${api}/hotel-attachment`);
+    //     const data = await response.data;
+    //     setHotelAttachment(data);
+    //   } catch (error) {
+    //     console.error("Error:", error);
+    //   }
+    // };
 
-    const fetchDataRoom = async () => {
-      try {
-        const response = await axios.get(`${api}/rooms`);
-        const data = await response.data;
-        setRooms(data);
-      } catch (error) {
-        console.error("Error:", error);
-      }
-    };
-    fetchDataRoom();
-    fetchHotelAttachment();
-    fetchAttachment();
+    // const fetchDataRoom = async () => {
+    //   try {
+    //     const response = await axios.get(`${api}/rooms`);
+    //     const data = await response.data;
+    //     setRooms(data);
+    //   } catch (error) {
+    //     console.error("Error:", error);
+    //   }
+    // };
+
+    // fetchDataRoom();
+    // fetchHotelAttachment();
+    // fetchAttachment();
     fetchDataHotel();
   }, []);
 
@@ -99,37 +103,37 @@ export default function ApproveHotel() {
     setCurrentPage(newPage);
   };
 
-  const hotelsWithAttachmentsAndRooms = dataHotel
-    .filter((hotel) => hotel.status === "await")
-    .map((hotel) => {
-      const hotelAtt = hotelAttachment.find((att) => att.id === hotel.id);
+  // const hotelsWithAttachmentsAndRooms = dataHotel
+  //   .filter((hotel) => hotel.status === "await")
+  //   .map((hotel) => {
+  //     const hotelAtt = hotelAttachment.find((att) => att.id === hotel.id);
 
-      const att = hotelAtt
-        ? attachment.find((a) => a.AttachmentID === hotelAtt.AttachmentID)
-        : null;
+  //     const att = hotelAtt
+  //       ? attachment.find((a) => a.AttachmentID === hotelAtt.AttachmentID)
+  //       : null;
 
-      const hotelRooms = rooms.filter((r) => r.id === hotel.id);
+  //     const hotelRooms = rooms.filter((r) => r.id === hotel.id);
 
-      const totalRoomQuantity = hotelRooms.reduce(
-        (sum, room) => sum + Number(room.room_quantity),
-        0
-      );
+  //     const totalRoomQuantity = hotelRooms.reduce(
+  //       (sum, room) => sum + Number(room.room_quantity),
+  //       0
+  //     );
 
-      return {
-        ...hotel,
-        FileUrl: att ? att.FileUrl : null,
-        room_quantity: totalRoomQuantity,
-      };
-    });
+  //     return {
+  //       ...hotel,
+  //       FileUrl: att ? att.FileUrl : null,
+  //       room_quantity: totalRoomQuantity,
+  //     };
+  //   });
 
-  const paginatedData = hotelsWithAttachmentsAndRooms.slice(
-    currentPage * ITEMS_PER_PAGE,
-    (currentPage + 1) * ITEMS_PER_PAGE
-  );
+  // const paginatedData = hotelsWithAttachmentsAndRooms.slice(
+  //   currentPage * ITEMS_PER_PAGE,
+  //   (currentPage + 1) * ITEMS_PER_PAGE
+  // );
   const navigate = useNavigate();
 
   const handleDetailApprove = (id: string) => {
-    navigate(`/approve-hotel/${id}`);
+    navigate(`/approval-hotel/${id}`);
   };
 
   return (
@@ -138,9 +142,9 @@ export default function ApproveHotel() {
 
       <div className="flex">
         <SideBar />
-        <div className=" bg-secondary h-fit p-5 w-full pl-[240px] pt-[90px]">
+        <div className=" bg-gray-100 h-fit p-5 w-full pl-[240px] pt-[90px] flex flex-col gap-4">
+          <p className=" w-full text-2xl font-[400]">Approve Hotel</p>
           <div className=" bg-white p-6">
-            <p className=" w-full  text-2xl">Approve Hotel</p>
             <div className="flex flex-col">
               <div className="overflow-x-auto sm:-mx-6 lg:-mx-8">
                 <div className="inline-block min-w-full py-4 sm:px-6 lg:px-8">
@@ -148,15 +152,16 @@ export default function ApproveHotel() {
                     <table className="min-w-full">
                       <TableHeader headers={headers} />
                       <tbody>
-                        {paginatedData.map((item, index) => (
+                        {dataHotel.map((item, index) => (
                           <tr
                             className=" border-stroke border-[1px]"
                             key={index}
                           >
-                            <TableImage data={item.FileUrl} />
+                            <TableImage data="https://img.freepik.com/free-photo/modern-spacious-room-with-large-panoramic-window_7502-7289.jpg?w=1380&t=st=1710141114~exp=1710141714~hmac=74692f396e2c090c66b23f27a14af3b6ba9e6819b76ccd2445b6d5c0582d260d" />
+
                             <TableRow
                               data={item.hotel_name}
-                              onClick={() => handleDetailApprove(item.id)}
+                              onClick={() => handleDetailApprove(item.hotel_id)}
                             />
                             <TableRow
                               data={item.hotel_email}
@@ -167,11 +172,11 @@ export default function ApproveHotel() {
                               onClick={undefined}
                             />
                             <TableRow
-                              data={item.room_quantity}
+                              data={item.number_of_rooms}
                               onClick={undefined}
                             />
                             <td className="px-6 py-4 text-sm font-normal text-black ">
-                              <div className="flex justify-between">
+                              <div className="flex gap-7">
                                 <ActionButton
                                   Icon={CiCircleCheck}
                                   buttonText="Approve"

@@ -4,7 +4,7 @@ import SideBar from "../components/SideBar";
 import { ConfigProvider, Table } from "antd";
 import { CiSearch } from "react-icons/ci";
 import axios from "axios";
-import { api } from "../configs/Api";
+import { api } from "../constants/api";
 
 const columns = [
   {

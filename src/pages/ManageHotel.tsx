@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import Header from "../components/Header";
 import SideBar from "../components/SideBar";
-import { api } from "../configs/Api";
+import { api } from "../constants/api";
 import axios from "axios";
 import { ConfigProvider, Table } from "antd";
 import { Link } from "react-router-dom";
@@ -57,16 +57,16 @@ export default function ManageHotel() {
 
   return (
     <>
-      <Header pageTitle="Manage Account" />
+      <Header pageTitle="Manage Hotel" />
       <div className="flex">
         <SideBar />
         <div className=" bg-secondary h-fit p-5 w-full pl-[240px] pt-[90px]">
-          <div className=" bg-white py-8 flex flex-col gap-3 px-12">
+          <div className=" bg-white py-6 flex flex-col gap-3 px-8">
             <p className=" w-full  text-2xl">Manage Hotel</p>
             <div className=" w-full flex border-b-[1px] border-black p-3 items-center">
               <input
                 type="text"
-                placeholder="Search Name Hotel Facility"
+                placeholder="Search Name Hotel"
                 className="w-full outline-none text-sm"
               />
               <CiSearch />

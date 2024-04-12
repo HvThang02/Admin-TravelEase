@@ -6,7 +6,8 @@ import { CiSearch } from "react-icons/ci";
 
 import type { DatePickerProps, TimePickerProps } from "antd";
 import { DatePicker, Select, Space, TimePicker } from "antd";
-import { api } from "../configs/Api";
+import { api } from "../constants/api";
+
 import axios from "axios";
 
 const { Option } = Select;
@@ -33,7 +34,7 @@ const renderPaymentTransferred = (paymentTransferred: boolean) => {
 
 const columns = [
   {
-    title: "ID",
+    title: "Ticket ID",
     dataIndex: "ticket_id",
   },
   {
@@ -109,7 +110,7 @@ export default function DashBoard() {
               <div className=" w-full flex border-b-[1px] border-black p-3 items-center">
                 <input
                   type="text"
-                  placeholder="Search Name Hotel Facility"
+                  placeholder="Search Ticket ID"
                   className="w-full outline-none text-sm"
                 />
                 <CiSearch />
