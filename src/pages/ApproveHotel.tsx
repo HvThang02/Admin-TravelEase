@@ -6,9 +6,11 @@ import TableRow from "../components/TableRow";
 import TableImage from "../components/TableImage";
 import { CiCircleCheck, CiCircleRemove } from "react-icons/ci";
 import ActionButton from "../components/TableButton";
-import { api } from "../constants/api";
+
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
+
+import { API_IMAGE, API } from "../constants/api";
 
 const ITEMS_PER_PAGE = 6;
 
@@ -54,7 +56,7 @@ export default function ApproveHotel() {
   useEffect(() => {
     const fetchDataHotel = async () => {
       try {
-        const response = await axios.get(`${api}/approval-hotel`);
+        const response = await axios.get(`${API}/approval-hotel`);
         const data = await response.data;
         console.log(data);
         setDataHotel(data);
