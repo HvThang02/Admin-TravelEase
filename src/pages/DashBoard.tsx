@@ -8,7 +8,7 @@ import type { DatePickerProps, TimePickerProps } from "antd";
 import { DatePicker, Select, Space, TimePicker } from "antd";
 
 import axios from "axios";
-import { API_IMAGE, API } from "../constants/api";
+import { api_image, api } from "../constants/api";
 
 const { Option } = Select;
 
@@ -67,7 +67,7 @@ export default function DashBoard() {
   useEffect(() => {
     const fetchDataTicket = async () => {
       try {
-        const response = await axios.get(`${API}/ticket`);
+        const response = await axios.get(`${api}/ticket`);
         const data = await response.data;
         setTicketData(data);
       } catch (error) {

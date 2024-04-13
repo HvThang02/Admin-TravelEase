@@ -13,7 +13,7 @@ import { FaCheck } from "react-icons/fa6";
 import { IoBanSharp } from "react-icons/io5";
 import { Result } from "antd";
 
-import { API_IMAGE, API } from "../constants/api";
+import { api_image, api } from "../constants/api";
 
 export default function DetailApproveHotel() {
   const navigate = useNavigate();
@@ -62,7 +62,7 @@ export default function DetailApproveHotel() {
   useEffect(() => {
     const fetchHotel = async () => {
       try {
-        const response = await axios.get(`${API}/approval-hotel/${hotel_id}`);
+        const response = await axios.get(`${api}/approval-hotel/${hotel_id}`);
         const data = response.data;
         setDataHotel(data.data);
       } catch (error) {
@@ -75,7 +75,7 @@ export default function DetailApproveHotel() {
   const handleApproveHotel = async () => {
     try {
       const response = await axios.post(
-        `${API}/approval-hotel/approve/${hotel_id}`
+        `${api}/approval-hotel/approve/${hotel_id}`
       );
       if (response.status === 200) {
         console.log("Hotel approved successfully");
@@ -93,7 +93,7 @@ export default function DetailApproveHotel() {
   const handleRejectHotel = async () => {
     try {
       const response = await axios.post(
-        `${API}/approval-hotel/reject/${hotel_id}`
+        `${api}/approval-hotel/reject/${hotel_id}`
       );
       if (response.status === 200) {
         console.log("Hotel rejected successfully");
@@ -199,7 +199,7 @@ export default function DetailApproveHotel() {
                           className="w-[20vh] items-center flex border p-2 rounded gap-2"
                         >
                           <img
-                            src={API_IMAGE + facility.facility_image}
+                            src={api_image + facility.facility_image}
                             alt=""
                             className="w-6 h-6"
                           />
@@ -227,7 +227,7 @@ export default function DetailApproveHotel() {
                     {dataHotel.hotel_images.map((image, index) => (
                       <img
                         key={index}
-                        src={API_IMAGE + image}
+                        src={api_image + image}
                         alt={`Hotel Image ${index + 1}`}
                         className="h-[20vh] object-cover rounded-md"
                       />

@@ -10,7 +10,7 @@ import ActionButton from "../components/TableButton";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 
-import { API_IMAGE, API } from "../constants/api";
+import { api_image, api } from "../constants/api";
 
 const ITEMS_PER_PAGE = 6;
 
@@ -56,7 +56,7 @@ export default function ApproveHotel() {
   useEffect(() => {
     const fetchDataHotel = async () => {
       try {
-        const response = await axios.get(`${API}/approval-hotel`);
+        const response = await axios.get(`${api}/approval-hotel`);
         const data = await response.data;
         console.log(data);
         setDataHotel(data);
