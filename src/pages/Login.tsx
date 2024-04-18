@@ -5,7 +5,7 @@ import { routePaths } from "../constants/routePaths";
 import { api_image, api } from "../constants/api";
 
 
-const logo = api_image + "/logo.png";
+const logo = api+"/logo.png";
 
 export default function Login() {
   const navigate = useNavigate();

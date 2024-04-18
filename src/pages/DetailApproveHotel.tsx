@@ -199,7 +199,7 @@ export default function DetailApproveHotel() {
                           className="w-[20vh] items-center flex border p-2 rounded gap-2"
                         >
                           <img
-                            src={api_image + facility.facility_image}
+                            src={api + facility.facility_image}
                             alt=""
                             className="w-6 h-6"
                           />
@@ -227,7 +227,7 @@ export default function DetailApproveHotel() {
                     {dataHotel.hotel_images.map((image, index) => (
                       <img
                         key={index}
-                        src={api_image + image}
+                        src={api + image}
                         alt={`Hotel Image ${index + 1}`}
                         className="h-[20vh] object-cover rounded-md"
                       />
