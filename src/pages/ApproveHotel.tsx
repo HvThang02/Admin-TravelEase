@@ -10,7 +10,7 @@ import ActionButton from "../components/TableButton";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 
-import { api_image, api } from "../constants/api";
+import { admin_api_image, api } from "../constants/api";
 
 const ITEMS_PER_PAGE = 6;
 

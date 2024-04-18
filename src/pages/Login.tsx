@@ -2,7 +2,7 @@ import React from "react";
 import { MdOutlineEmail, MdLockOutline } from "react-icons/md";
 import { useNavigate } from "react-router-dom";
 import { routePaths } from "../constants/routePaths";
-import { api_image, api } from "../constants/api";
+import { admin_api_image, api } from "../constants/api";
 
 
 const logo = api+"/logo.png";

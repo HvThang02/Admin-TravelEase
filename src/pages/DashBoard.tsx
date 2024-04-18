@@ -8,7 +8,7 @@ import type { DatePickerProps, TimePickerProps } from "antd";
 import { DatePicker, Select, Space, TimePicker } from "antd";
 
 import axios from "axios";
-import { api_image, api } from "../constants/api";
+import { admin_api_image, api } from "../constants/api";
 
 const { Option } = Select;
 
