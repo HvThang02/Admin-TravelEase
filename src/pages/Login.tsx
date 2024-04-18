@@ -2,8 +2,10 @@ import React from "react";
 import { MdOutlineEmail, MdLockOutline } from "react-icons/md";
 import { useNavigate } from "react-router-dom";
 import { routePaths } from "../constants/routePaths";
+import { api_image, api } from "../constants/api";
 
-const logo = "./src/assets/logo.png";
+
+const logo = api_image + "/logo.png";
 
 export default function Login() {
   const navigate = useNavigate();
