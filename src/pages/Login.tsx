@@ -4,7 +4,6 @@ import { useNavigate } from "react-router-dom";
 import { routePaths } from "../constants/routePaths";
 import { admin_api_image, api } from "../constants/api";
 
-
 const logo = admin_api_image + "/logo.png";
 
 export default function Login() {

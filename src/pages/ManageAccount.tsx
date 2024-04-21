@@ -9,11 +9,11 @@ import { api } from "../constants/api";
 const columns = [
   {
     title: "ID",
-    dataIndex: "id",
+    dataIndex: "user_id",
   },
   {
     title: "Name",
-    dataIndex: "fullname",
+    dataIndex: "full_name",
   },
   {
     title: "Email",
@@ -25,22 +25,23 @@ const columns = [
   },
 ];
 
+interface DataUser {
+  user_id: number;
+  email: string;
+  phone_number: string;
+  full_name: string;
+  blocked: boolean;
+}
+
 export default function ManageAccount() {
-  const [dataAccount, setDataAccount] = useState<
-    {
-      id: string;
-      email: string;
-      phone_number: string;
-      fullname: string;
-    }[]
-  >([]);
+  const [dataAccount, setDataAccount] = useState<DataUser[]>([]);
 
   useEffect(() => {
     const fetchDataHotel = async () => {
       try {
         const response = await axios.get(`${api}/users`);
-        const data = await response.data;
-        setDataAccount(data);
+        const responseData = await response.data;
+        setDataAccount(responseData.data);
       } catch (error) {
         console.error("Error:", error);
       }

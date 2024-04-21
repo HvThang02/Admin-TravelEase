@@ -67,9 +67,9 @@ export default function DashBoard() {
   useEffect(() => {
     const fetchDataTicket = async () => {
       try {
-        const response = await axios.get(`${api}/ticket`);
-        const data = await response.data;
-        setTicketData(data);
+        const response = await axios.get(`${api}/tickets`);
+        const responseData = await response.data;
+        setTicketData(responseData.data);
       } catch (error) {
         console.error("Error:", error);
       }

@@ -8,26 +8,29 @@ import { CiSearch } from "react-icons/ci";
 
 const ITEMS_PER_PAGE = 10;
 
+interface DataFacilityType {
+  facility_type_id: number;
+  facility_type_name: string;
+}
+
 export default function FacilityType() {
   const [currentPage, setCurrentPage] = useState(0);
-  const [facilityTypeData, setFacilityTypeData] = useState([
-    {
-      id: "",
-      facility_type_name: "",
-    },
-  ]);
+  const [facilityTypeData, setFacilityTypeData] = useState<DataFacilityType[]>(
+    []
+  );
+
+  const fetchFacilityType = async () => {
+    try {
+      const response = await axios.get(`${api}/facility-type`);
+      const reponseData = response.data;
+      console.log(reponseData.data);
+      setFacilityTypeData(reponseData.data);
+    } catch (error) {
+      console.error("Error:", error);
+    }
+  };
 
   useEffect(() => {
-    const fetchFacilityType = async () => {
-      try {
-        const response = await axios.get(`${api}/facility-type`);
-        const data = response.data;
-        setFacilityTypeData(data);
-      } catch (error) {
-        console.error("Error:", error);
-      }
-    };
-
     fetchFacilityType();
   }, []);
 
@@ -35,12 +38,13 @@ export default function FacilityType() {
 
   const addNewFacilityType = async () => {
     try {
-      const response = await axios.post(`${api}/facility-type`, {
-        facility_type_name: facilityTypeValue,
-      });
-      const newFacilityType = response.data;
-      setFacilityTypeData([...facilityTypeData, newFacilityType]);
-      setFacilityTypeValue("");
+      axios
+        .post(`${api}/facility-type/add`, {
+          facility_type_name: facilityTypeValue,
+        })
+        .then((response) => {
+          console.log(response.status, response.data);
+        });
     } catch (error) {
       console.error("Error:", error);
     }
@@ -62,8 +66,10 @@ export default function FacilityType() {
 
   const deleteFacilityType = async (id) => {
     try {
-      await axios.delete(`${api}/facility-type/${id}`);
-      setFacilityTypeData(facilityTypeData.filter((type) => type.id !== id));
+      await axios.post(`${api}/facility-type/delete/${id}`);
+      setFacilityTypeData(
+        facilityTypeData.filter((type) => type.facility_type_id !== id)
+      );
     } catch (error) {
       console.error("Error:", error);
     }
@@ -114,14 +120,16 @@ export default function FacilityType() {
                   {paginatedData.map((type) => (
                     <div className="py-3 flex w-full items-center justify-between">
                       <li
-                        key={type.id}
+                        key={type.facility_type_id}
                         className="text-sm overflow-ellipsis overflow-hidden whitespace-nowrap w-[100vh]"
                       >
                         {type.facility_type_name}
                       </li>
                       <div className=" w-[30px]">
                         <HiOutlineTrash
-                          onClick={() => deleteFacilityType(type.id)}
+                          onClick={() =>
+                            deleteFacilityType(type.facility_type_id)
+                          }
                           className=" cursor-pointer"
                         />
                       </div>

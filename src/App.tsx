@@ -4,8 +4,7 @@ import Login from "./pages/Login";
 import ApproveHotel from "./pages/ApproveHotel";
 import DetailHotel from "./pages/DetailApproveHotel";
 import FacilityType from "./pages/FacilityType";
-import HotelFacility from "./pages/HotelFacility";
-import RoomFacility from "./pages/RoomFacility";
+import HotelFacility from "./pages/ListFacilities";
 import DashBoard from "./pages/DashBoard";
 import ManageHotel from "./pages/ManageHotel";
 import ManageAccount from "./pages/ManageAccount";
@@ -18,8 +17,7 @@ export default function App() {
       <Route path="/approval-hotel/:hotel_id" element={<DetailHotel />} />
       <Route path="/approval-hotel" element={<ApproveHotel />} />
       <Route path="/facility-type" element={<FacilityType />} />
-      <Route path="/hotel-facility" element={<HotelFacility />} />
-      <Route path="/room-facility" element={<RoomFacility />} />
+      <Route path="/facilities" element={<HotelFacility />} />
       <Route path="/dashboard" element={<DashBoard />} />
       <Route path="/manage-hotel" element={<ManageHotel />} />
       <Route path="/manage-account" element={<ManageAccount />} />

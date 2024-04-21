@@ -33,7 +33,7 @@ export default function SideBar() {
   };
 
   const handlePageChangeHotelFacility = () => {
-    navigate(routePaths.HOTEL_FACILITY);
+    navigate(routePaths.FACILITIES);
   };
   const handlePageChangeRoomFacility = () => {
     navigate(routePaths.ROOM_FACILITY);
@@ -129,7 +129,7 @@ export default function SideBar() {
         <li
           className={`${
             location.pathname == routePaths.FACILITY_TYPE ||
-            location.pathname == routePaths.HOTEL_FACILITY
+            location.pathname == routePaths.FACILITIES
               ? "bg-secondary text-primary"
               : ""
           } py-2 px-4 hover:bg-secondary hover:text-primary cursor-pointer flex items-center justify-between`}
@@ -160,23 +160,13 @@ export default function SideBar() {
             </li>
             <li
               className={`${
-                location.pathname.startsWith(routePaths.HOTEL_FACILITY)
+                location.pathname.startsWith(routePaths.FACILITIES)
                   ? " text-primary"
                   : ""
               } pb-2 pt-1 hover:text-primary cursor-pointer text-xs`}
               onClick={handlePageChangeHotelFacility}
             >
-              Hotel Facility
-            </li>
-            <li
-              className={`${
-                location.pathname.startsWith(routePaths.ROOM_FACILITY)
-                  ? " text-primary"
-                  : ""
-              } pb-2 pt-1 hover:text-primary cursor-pointer text-xs`}
-              onClick={handlePageChangeRoomFacility}
-            >
-              Room Facility
+              List Facility
             </li>
           </ul>
         )}

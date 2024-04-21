@@ -56,7 +56,7 @@ export default function ApproveHotel() {
   useEffect(() => {
     const fetchDataHotel = async () => {
       try {
-        const response = await axios.get(`${api}/approval-hotel`);
+        const response = await axios.get(`${api}/approval-hotels`);
         const data = await response.data;
         console.log(data);
         setDataHotel(data);
