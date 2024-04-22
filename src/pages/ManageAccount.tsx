@@ -72,7 +72,14 @@ export default function ManageAccount() {
                 },
               }}
             >
-              <Table columns={columns} dataSource={dataAccount} size="small" />
+              <Table
+                columns={columns}
+                dataSource={dataAccount.map((user, index) => ({
+                  ...user,
+                  key: index,
+                }))}
+                size="small"
+              />
             </ConfigProvider>
           </div>
         </div>

@@ -1,5 +1,5 @@
 export const routePaths = {
-  LOGIN: "/login",
+  LOGIN: "/",
   APPROVE_HOTEL: "/approval-hotel",
   DASHBOARD: "/dashboard",
   FACILITY_TYPE: "/facility-type",

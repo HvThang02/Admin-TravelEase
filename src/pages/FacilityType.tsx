@@ -3,7 +3,10 @@ import Header from "../components/Header";
 import SideBar from "../components/SideBar";
 import axios from "axios";
 import { api } from "../constants/api";
+
+//icon
 import { HiOutlineTrash } from "react-icons/hi2";
+import { FiEdit3 } from "react-icons/fi";
 import { CiSearch } from "react-icons/ci";
 
 const ITEMS_PER_PAGE = 10;
@@ -19,11 +22,17 @@ export default function FacilityType() {
     []
   );
 
+  const [facilityTypeValue, setFacilityTypeValue] = useState("");
+  const [searchValue, setSearchValue] = useState("");
+
+  const [isEditing, setIsEditing] = useState(false);
+  const [editingFacilityTypeName, setEditingFacilityTypeName] = useState("");
+  const [editingFacilityTypeId, setEditingFacilityTypeId] = useState(0);
+
   const fetchFacilityType = async () => {
     try {
       const response = await axios.get(`${api}/facility-type`);
       const reponseData = response.data;
-      console.log(reponseData.data);
       setFacilityTypeData(reponseData.data);
     } catch (error) {
       console.error("Error:", error);
@@ -34,37 +43,31 @@ export default function FacilityType() {
     fetchFacilityType();
   }, []);
 
-  const [facilityTypeValue, setFacilityTypeValue] = useState("");
-
-  const addNewFacilityType = async () => {
-    try {
-      axios
-        .post(`${api}/facility-type/add`, {
-          facility_type_name: facilityTypeValue,
-        })
-        .then((response) => {
-          console.log(response.status, response.data);
-        });
-    } catch (error) {
-      console.error("Error:", error);
-    }
-  };
-
-  const [searchValue, setSearchValue] = useState("");
-
   const paginatedData = facilityTypeData
-    .filter((type) => type.facility_type_name.includes(searchValue))
+    .filter((type) => type?.facility_type_name?.includes(searchValue))
     .slice(currentPage * ITEMS_PER_PAGE, (currentPage + 1) * ITEMS_PER_PAGE);
+
+  const handleSearchChange = (e: any) => {
+    setSearchValue(e.target.value);
+  };
 
   const handlePageChange = (newPage: number) => {
     setCurrentPage(newPage);
   };
 
-  const handleSearchChange = (event) => {
-    setSearchValue(event.target.value);
+  const addNewFacilityType = async () => {
+    try {
+      await axios.post(`${api}/facility-type/add`, {
+        facility_type_name: facilityTypeValue,
+      });
+      fetchFacilityType();
+      setFacilityTypeValue("");
+    } catch (error) {
+      console.error("Error:", error);
+    }
   };
 
-  const deleteFacilityType = async (id) => {
+  const deleteFacilityType = async (id: number) => {
     try {
       await axios.post(`${api}/facility-type/delete/${id}`);
       setFacilityTypeData(
@@ -75,6 +78,31 @@ export default function FacilityType() {
     }
   };
 
+  const updateFacilityType = async (id: number, newName: string) => {
+    try {
+      await axios.post(`${api}/facility-type/update/${id}`, {
+        facility_type_name: newName,
+      });
+      const updatedFacilityType = facilityTypeData.find(
+        (type) => type.facility_type_id === id
+      );
+      if (updatedFacilityType) {
+        updatedFacilityType.facility_type_name = newName;
+        setFacilityTypeData([...facilityTypeData]);
+      }
+
+      setIsEditing(false);
+    } catch (error) {
+      console.error("Error:", error);
+    }
+  };
+
+  const totalPages = Math.ceil(
+    facilityTypeData.filter((type) =>
+      type?.facility_type_name?.includes(searchValue)
+    ).length / ITEMS_PER_PAGE
+  );
+
   return (
     <>
       <Header pageTitle="Facility Type" />
@@ -82,24 +110,47 @@ export default function FacilityType() {
         <SideBar />
         <div className="bg-secondary p-5 w-full pl-[240px] pt-[90px]">
           <div className=" bg-white flex p-6">
-            <div className=" w-1/2 px-8">
+            <div className="w-1/2 px-8">
               <p className="items-center justify-center flex font-normal text-2xl w-full  p-2">
-                Add Facility Type
+                {isEditing ? "Update Facility Type" : "Add Facility Type"}
               </p>
               <div className="py-4">
-                <input
-                  placeholder="Type Facility Type"
-                  className="w-full p-4 border-stroke border-[1px] rounded-md"
-                  value={facilityTypeValue}
-                  onChange={(e) => setFacilityTypeValue(e.target.value)}
-                />
+                {isEditing ? (
+                  <input
+                    placeholder="Type Facility Type"
+                    className="w-full p-4 border-stroke border-[1px] rounded-md"
+                    value={editingFacilityTypeName}
+                    onChange={(e) => setEditingFacilityTypeName(e.target.value)}
+                  />
+                ) : (
+                  <input
+                    placeholder="Type Facility Type"
+                    className="w-full p-4 border-stroke border-[1px] rounded-md"
+                    value={facilityTypeValue}
+                    onChange={(e) => setFacilityTypeValue(e.target.value)}
+                  />
+                )}
               </div>
-              <button
-                className=" w-full bg-green text-white items-center flex justify-center rounded-md p-4"
-                onClick={addNewFacilityType}
-              >
-                <p>ADD</p>
-              </button>
+              {isEditing ? (
+                <button
+                  className=" w-full bg-[#D3D63F] text-white items-center flex justify-center rounded-md p-4"
+                  onClick={() =>
+                    updateFacilityType(
+                      editingFacilityTypeId,
+                      editingFacilityTypeName
+                    )
+                  }
+                >
+                  <p>UPDATE</p>
+                </button>
+              ) : (
+                <button
+                  className=" w-full bg-green text-white items-center flex justify-center rounded-md p-4"
+                  onClick={addNewFacilityType}
+                >
+                  <p>ADD</p>
+                </button>
+              )}
             </div>
             <div className="w-1/2 px-8 border-l-[1px] border-stroke">
               <div className="w-full">
@@ -118,14 +169,25 @@ export default function FacilityType() {
                 </div>
                 <ul className="py-4 px-2">
                   {paginatedData.map((type) => (
-                    <div className="py-3 flex w-full items-center justify-between">
+                    <div
+                      className="py-3 flex w-full items-center justify-between"
+                      key={type.facility_type_id}
+                    >
                       <li
                         key={type.facility_type_id}
                         className="text-sm overflow-ellipsis overflow-hidden whitespace-nowrap w-[100vh]"
                       >
                         {type.facility_type_name}
                       </li>
-                      <div className=" w-[30px]">
+                      <div className="w-[40px] flex gap-2">
+                        <FiEdit3
+                          onClick={() => {
+                            setIsEditing(true);
+                            setEditingFacilityTypeId(type.facility_type_id);
+                            setEditingFacilityTypeName(type.facility_type_name);
+                          }}
+                          className="cursor-pointer"
+                        />
                         <HiOutlineTrash
                           onClick={() =>
                             deleteFacilityType(type.facility_type_id)
@@ -146,7 +208,7 @@ export default function FacilityType() {
                   Back
                 </button>
 
-                {Array(Math.ceil(facilityTypeData.length / ITEMS_PER_PAGE))
+                {Array(totalPages)
                   .fill(null)
                   .map((_, index) => (
                     <button
@@ -162,10 +224,7 @@ export default function FacilityType() {
 
                 <button
                   onClick={() => handlePageChange(currentPage + 1)}
-                  disabled={
-                    currentPage ===
-                    Math.ceil(facilityTypeData.length / ITEMS_PER_PAGE) - 1
-                  }
+                  disabled={currentPage === totalPages - 1}
                   className="text-xs border-[1px] border-stroke text-black py-2 px-4 rounded-md mx-1 hover:bg-gray_bg "
                 >
                   Next

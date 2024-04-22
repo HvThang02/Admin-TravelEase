@@ -50,6 +50,12 @@ export default function SideBar() {
   const handlePageChangeManageHotel = () => {
     navigate(routePaths.MANAGE_HOTEL);
   };
+
+  const handleLogout = () => {
+    localStorage.removeItem("token");
+
+    navigate(routePaths.LOGIN);
+  };
   return (
     <aside className="bg-white text-black w-[220px] fixed drop-shadow-md z-20 h-full flex flex-col items-center">
       <img src={logo} className="w-[120px] h-[120px] flex items-center " />
@@ -173,6 +179,7 @@ export default function SideBar() {
 
         <li
           className={`py-2 px-4 hover:bg-secondary hover:text-primary cursor-pointer`}
+          onClick={handleLogout}
         >
           <div className="flex items-center space-x-3">
             <RiShutDownLine />

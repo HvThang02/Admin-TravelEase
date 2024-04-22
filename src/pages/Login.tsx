@@ -1,16 +1,41 @@
-import React from "react";
+import React, { useState } from "react";
 import { MdOutlineEmail, MdLockOutline } from "react-icons/md";
 import { useNavigate } from "react-router-dom";
 import { routePaths } from "../constants/routePaths";
 import { admin_api_image, api } from "../constants/api";
+import axios from "axios";
 
 const logo = admin_api_image + "/logo.png";
 
 export default function Login() {
   const navigate = useNavigate();
 
-  const handleSignIn = () => {
-    navigate(routePaths.APPROVE_HOTEL);
+  const [errorMessage, setErrorMessage] = useState("");
+
+  const [email, setEmail] = useState("admin@gmail.com");
+  const [password, setPassword] = useState("Capstone@123");
+
+  const handleEmailChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setEmail(event.target.value);
+  };
+
+  const handlePasswordChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setPassword(event.target.value);
+  };
+
+  const handleSignIn = async (email, password) => {
+    try {
+      const response = await axios.post(`${api}/auth/login`, {
+        email,
+        password,
+      });
+      const { data } = response;
+      localStorage.setItem("token", data.token);
+      navigate(routePaths.APPROVE_HOTEL);
+    } catch (error) {
+      console.error("Error:", error);
+      setErrorMessage("Invalid email or password");
+    }
   };
 
   return (
@@ -32,6 +57,9 @@ export default function Login() {
                 type="email"
                 placeholder="Enter your email"
                 className="border-[1px] border-[#E2E8F0] p-2 px-4 rounded-md placeholder:text-sm placeholder:text-grey"
+                id="email"
+                value={email}
+                onChange={handleEmailChange}
               />
               <MdOutlineEmail className="absolute right-3 bottom-1/2 top-1/2 text-grey" />
             </div>
@@ -43,13 +71,27 @@ export default function Login() {
                 type="password"
                 placeholder="Enter your password"
                 className="border-[1px] border-[#E2E8F0] p-2 px-4 rounded-md placeholder:text-sm placeholder:text-grey"
+                id="password"
+                value={password}
+                onChange={handlePasswordChange}
               />
               <MdLockOutline className="absolute right-3 bottom-1/2 top-1/2 text-grey" />
             </div>
+            {errorMessage && (
+              <p className="text-red-500 text-sm">{errorMessage}</p>
+            )}
             <button
-              type="submit"
+              type="button"
               className="bg-primary text-white py-3 rounded-md "
-              onClick={handleSignIn}
+              onClick={() => {
+                const email = (
+                  document.getElementById("email") as HTMLInputElement
+                ).value;
+                const password = (
+                  document.getElementById("password") as HTMLInputElement
+                ).value;
+                handleSignIn(email, password);
+              }}
             >
               Sign In
             </button>

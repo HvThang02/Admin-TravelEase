@@ -4,6 +4,9 @@ import SideBar from "../components/SideBar";
 import axios from "axios";
 import { admin_api_image, api } from "../constants/api";
 import { CiSearch, CiCirclePlus } from "react-icons/ci";
+
+import { FiEdit3 } from "react-icons/fi";
+
 import { HiOutlineTrash } from "react-icons/hi2";
 
 import {
@@ -40,7 +43,7 @@ interface DataFacilities {
 }
 
 interface DataFacilityType {
-  facility_type_id: string;
+  facility_type_id: number;
   facility_type_name: string;
 }
 
@@ -66,9 +69,12 @@ export default function HotelFacility() {
     );
   };
 
-  const handleChange = (e) => {
-    console.log(e.target.files);
-    setFacilityImage(e.target.files[0]);
+  const onChange: UploadProps["onChange"] = ({ fileList: newFileList }) => {
+    setFacilityImage(newFileList);
+  };
+
+  const handlePageChange = (newPage: number) => {
+    setCurrentPage(newPage);
   };
 
   const uploadButton = (
@@ -80,7 +86,8 @@ export default function HotelFacility() {
 
   const [facilities, setFacilities] = useState<DataFacilities[]>([]);
   const [facilityType, setFacilityType] = useState<DataFacilityType[]>([]);
-  const [hotelFacilityInput, setHotelFacilityInput] = useState("");
+  const [facilityInput, setFacilityInput] = useState("");
+  const [searchValue, setSearchValue] = useState("");
 
   const fetchFacilities = async () => {
     try {
@@ -102,33 +109,45 @@ export default function HotelFacility() {
     }
   };
 
-  const [selectedValue, setSelectedValue] = useState("Search to Select");
+  const [selectedValue, setSelectedValue] = useState<number | null>(null);
 
-  const handleChangeFacilityType = (value) => {
+  const handleChangeFacilityType = (value: number) => {
     setSelectedValue(value);
   };
 
-  console.log(selectedValue);
+  const addFacility = async () => {
+    try {
+      const formData = new FormData();
 
-  const addNewHotelFacility = async () => {
-    // try {
-    //   const response = await axios.post<DataFacilities>(`${api}/facility/add`, {
-    //     facility_name: hotelFacilityInput,
-    //     facility_type: selectedValue,
-    //     facility_image:
-    //       "https://theme.hstatic.net/1000340570/1000964732/14/icon-favorite.svg?v=3992",
-    //   });
-    //   const newHotelFacility = response.data;
-    //   console.log(newHotelFacility);
-    //   setFacilities((prevData) => [...prevData, newHotelFacility]);
-    //   setHotelFacilityInput("");
-    //   setFileList([]);
-    // } catch (error) {
-    //   console.error("Error:", error);
-    // }
+      if (facilityImage[0]?.originFileObj) {
+        formData.append(
+          "file",
+          facilityImage[0].originFileObj,
+          facilityImage[0].originFileObj.name
+        );
+        formData.append("file", "multipart/form-data");
+      }
+
+      const jsonData = JSON.stringify({
+        facility_name: facilityInput,
+        facility_type: selectedValue,
+      });
+
+      const jsonBlob = new Blob([jsonData], { type: "application/json" });
+      formData.append("data", jsonBlob);
+
+      await axios.post(`${api}/facility/add`, formData);
+
+      fetchFacilities();
+      setFacilityInput("");
+      setFacilityImage([]);
+      setSelectedValue(null);
+    } catch (error) {
+      console.error("Error:", error);
+    }
   };
 
-  const deleteFacility = async (id) => {
+  const deleteFacility = async (id: number) => {
     try {
       await axios.post(`${api}/facility/delete/${id}`);
       setFacilities(facilities.filter((type) => type.facility_id !== id));
@@ -143,19 +162,71 @@ export default function HotelFacility() {
   }, []);
 
   const filterOption = facilityType.map((type) => {
-    return { value: type.facility_type_name, label: type.facility_type_name };
+    return {
+      value: type.facility_type_id,
+      label: type.facility_type_name,
+    };
   });
 
-  const [searchValue, setSearchValue] = useState("");
   const [currentPage, setCurrentPage] = useState(0);
 
   const paginatedData = facilities
-    .filter((item) => item.facility_name.includes(searchValue))
+    .filter((item) =>
+      item.facility_name
+        .toLowerCase()
+        .includes(searchValue.toLowerCase().trim())
+    )
     .slice(currentPage * ITEMS_PER_PAGE, (currentPage + 1) * ITEMS_PER_PAGE);
 
-  const handlePageChange = (newPage: number) => {
-    setCurrentPage(newPage);
+  const [isEditing, setIsEditing] = useState(false);
+  const [editingFacilityId, setEditingFacilityId] = useState(0);
+  const [editingFacilityName, setEditingFacilityName] = useState("");
+
+  const updateFacility = async (id: number, newFacilityName: string) => {
+    try {
+      const updatedFacility = facilities.find(
+        (type) => type.facility_id === id
+      );
+      if (updatedFacility) {
+        const formData = new FormData();
+
+        if (facilityImage[0]?.originFileObj) {
+          formData.append(
+            "file",
+            facilityImage[0].originFileObj,
+            facilityImage[0].originFileObj.name
+          );
+          formData.append("file", "multipart/form-data");
+        }
+
+        const jsonData = JSON.stringify({
+          facility_name: newFacilityName,
+          facility_type: selectedValue,
+        });
+
+        const jsonBlob = new Blob([jsonData], { type: "application/json" });
+        formData.append("data", jsonBlob);
+
+        await axios.post(`${api}/facility/update/${id}`, formData);
+
+        fetchFacilities();
+        setFacilityInput("");
+        setFacilityImage([]);
+        setSelectedValue(null);
+        setIsEditing(false);
+      }
+    } catch (error) {
+      console.error("Error:", error);
+    }
   };
+
+  const totalPages = Math.ceil(
+    facilities.filter((item) =>
+      item.facility_name
+        .toLowerCase()
+        .includes(searchValue.toLowerCase().trim())
+    ).length / ITEMS_PER_PAGE
+  );
 
   return (
     <>
@@ -164,7 +235,7 @@ export default function HotelFacility() {
         <SideBar />
         <div className="bg-gray-100 h-fit p-5 w-full pl-[240px] pt-[90px] flex flex-col gap-4">
           <div className=" bg-white flex p-6 h-fit">
-            <div className=" w-1/2 px-8">
+            <div className="w-1/2 px-8">
               <p className="items-center justify-center flex font-normal text-2xl w-full  p-2">
                 Add Facility
               </p>
@@ -182,10 +253,10 @@ export default function HotelFacility() {
                       listType="picture-card"
                       fileList={facilityImage}
                       onPreview={handlePreview}
-                      onChange={handleChange}
-                      accept=".png"
+                      onChange={onChange}
+                      accept=".png,.jpg,.jpeg"
                     >
-                      {facilityImage.length == 1 ? null : uploadButton}
+                      {facilityImage.length < 1 && uploadButton}
                     </Upload>
                   </ConfigProvider>
 
@@ -199,12 +270,22 @@ export default function HotelFacility() {
                   </Modal>
                 </div>
                 <div className="flex flex-col w-full gap-2">
-                  <Input
-                    placeholder="Type Facility Name"
-                    value={hotelFacilityInput}
-                    onChange={(e) => setHotelFacilityInput(e.target.value)}
-                    className="h-1/2"
-                  />
+                  {isEditing ? (
+                    <Input
+                      placeholder="Type Facility Name"
+                      value={editingFacilityName}
+                      onChange={(e) => setEditingFacilityName(e.target.value)}
+                      className="h-1/2"
+                    />
+                  ) : (
+                    <Input
+                      placeholder="Type Facility Name"
+                      value={facilityInput}
+                      onChange={(e) => setFacilityInput(e.target.value)}
+                      className="h-1/2"
+                    />
+                  )}
+
                   <Select
                     showSearch
                     optionFilterProp="children"
@@ -212,28 +293,42 @@ export default function HotelFacility() {
                       ...option,
                       key: index,
                     }))}
+                    placeholder="Search To Select"
                     value={selectedValue}
                     onChange={handleChangeFacilityType}
                     className="h-1/2"
                   />
                 </div>
               </div>
-              <button
-                className=" w-full bg-green text-white items-center flex justify-center rounded-md p-4"
-                onClick={addNewHotelFacility}
-              >
-                <p>ADD</p>
-              </button>
+
+              {isEditing ? (
+                <button
+                  className=" w-full bg-[#D3D63F] text-white items-center flex justify-center rounded-md p-4"
+                  onClick={() =>
+                    updateFacility(editingFacilityId, editingFacilityName)
+                  }
+                >
+                  <p>UPDATE</p>
+                </button>
+              ) : (
+                <button
+                  className=" w-full bg-green text-white items-center flex justify-center rounded-md p-4"
+                  onClick={addFacility}
+                >
+                  <p>ADD</p>
+                </button>
+              )}
             </div>
             <div className="w-1/2 px-8 border-l-[1px] border-stroke h-full">
               <div className="w-full">
                 <p className="font-normal text-2xl w-full px-2 pb-2">
-                  List Hotel Facility
+                  List Facilities
                 </p>
                 <div className=" w-full flex border-b-[1px] border-black p-3 items-center">
                   <input
-                    type="text"
-                    placeholder="Search Name Hotel Facility"
+                    placeholder="Search Name Facilities"
+                    value={searchValue}
+                    onChange={(e) => setSearchValue(e.target.value)}
                     className="w-full outline-none text-sm"
                   />
                   <CiSearch />
@@ -267,10 +362,20 @@ export default function HotelFacility() {
                               />
                             }
                           />
-                          <HiOutlineTrash
-                            className="cursor-pointer"
-                            onClick={() => deleteFacility(item.facility_id)}
-                          />
+                          <div className="flex gap-2">
+                            <FiEdit3
+                              className="cursor-pointer"
+                              onClick={() => {
+                                setIsEditing(true);
+                                setEditingFacilityId(item.facility_id);
+                                setEditingFacilityName(item.facility_name);
+                              }}
+                            />
+                            <HiOutlineTrash
+                              className="cursor-pointer"
+                              onClick={() => deleteFacility(item.facility_id)}
+                            />
+                          </div>
                         </List.Item>
                       )}
                     />
@@ -285,7 +390,7 @@ export default function HotelFacility() {
                       Back
                     </button>
 
-                    {Array(Math.ceil(facilities.length / ITEMS_PER_PAGE))
+                    {Array(totalPages)
                       .fill(null)
                       .map((_, index) => (
                         <button
@@ -301,10 +406,7 @@ export default function HotelFacility() {
 
                     <button
                       onClick={() => handlePageChange(currentPage + 1)}
-                      disabled={
-                        currentPage ===
-                        Math.ceil(facilities.length / ITEMS_PER_PAGE) - 1
-                      }
+                      disabled={currentPage === totalPages - 1}
                       className="text-xs border-[1px] border-stroke text-black py-2 px-4 rounded-md mx-1 hover:bg-gray_bg "
                     >
                       Next
