@@ -16,127 +16,44 @@ const ITEMS_PER_PAGE = 6;
 
 const headers = ["Image", "Name", "Email", "Phone", "Number of room", "Action"];
 
+interface DataHotel {
+  hotel_id: number;
+  hotel_name: string;
+  hotel_email: string;
+  hotel_address: string;
+  number_of_rooms: number;
+  hotel_contact_number: string;
+  hotel_images: "";
+}
+
 export default function ApproveHotel() {
   const [currentPage, setCurrentPage] = useState(0);
-  const [dataHotel, setDataHotel] = useState([
-    {
-      hotel_id: "",
-      hotel_name: "",
-      hotel_email: "",
-      hotel_address: "",
-      number_of_rooms: "",
-      hotel_contact_number: "",
-      hotel_images: "",
-    },
-  ]);
+  const [dataHotel, setDataHotel] = useState<DataHotel[]>([]);
 
-  // const [attachment, setAttachment] = useState<
-  //   {
-  //     AttachmentID: string;
-  //     FileUrl: string;
-  //   }[]
-  // >([]);
-
-  // const [hotelAttachment, setHotelAttachment] = useState<
-  //   {
-  //     id: string;
-  //     AttachmentID: string;
-  //     hotel_id: string;
-  //   }[]
-  // >([]);
-
-  // const [rooms, setRooms] = useState<
-  //   {
-  //     id: string;
-  //     room_quantity: number;
-  //     hotel_id: string;
-  //   }[]
-  // >([]);
-
-  useEffect(() => {
-    const fetchDataHotel = async () => {
-      try {
-        const response = await axios.get(`${api}/approval-hotels`);
-        const data = await response.data;
-        console.log(data);
-        setDataHotel(data);
-      } catch (error) {
-        console.error("Error:", error);
-      }
-    };
-
-    // const fetchAttachment = async () => {
-    //   try {
-    //     const response = await axios.get(`${api}/attachment`);
-    //     const data = await response.data;
-    //     setAttachment(data);
-    //   } catch (error) {
-    //     console.error("Error:", error);
-    //   }
-    // };
-
-    // const fetchHotelAttachment = async () => {
-    //   try {
-    //     const response = await axios.get(`${api}/hotel-attachment`);
-    //     const data = await response.data;
-    //     setHotelAttachment(data);
-    //   } catch (error) {
-    //     console.error("Error:", error);
-    //   }
-    // };
-
-    // const fetchDataRoom = async () => {
-    //   try {
-    //     const response = await axios.get(`${api}/rooms`);
-    //     const data = await response.data;
-    //     setRooms(data);
-    //   } catch (error) {
-    //     console.error("Error:", error);
-    //   }
-    // };
-
-    // fetchDataRoom();
-    // fetchHotelAttachment();
-    // fetchAttachment();
-    fetchDataHotel();
-  }, []);
+  const navigate = useNavigate();
 
   const handlePageChange = (newPage: number) => {
     setCurrentPage(newPage);
   };
 
-  // const hotelsWithAttachmentsAndRooms = dataHotel
-  //   .filter((hotel) => hotel.status === "await")
-  //   .map((hotel) => {
-  //     const hotelAtt = hotelAttachment.find((att) => att.id === hotel.id);
-
-  //     const att = hotelAtt
-  //       ? attachment.find((a) => a.AttachmentID === hotelAtt.AttachmentID)
-  //       : null;
-
-  //     const hotelRooms = rooms.filter((r) => r.id === hotel.id);
-
-  //     const totalRoomQuantity = hotelRooms.reduce(
-  //       (sum, room) => sum + Number(room.room_quantity),
-  //       0
-  //     );
-
-  //     return {
-  //       ...hotel,
-  //       FileUrl: att ? att.FileUrl : null,
-  //       room_quantity: totalRoomQuantity,
-  //     };
-  //   });
-
-  // const paginatedData = hotelsWithAttachmentsAndRooms.slice(
-  //   currentPage * ITEMS_PER_PAGE,
-  //   (currentPage + 1) * ITEMS_PER_PAGE
-  // );
-  const navigate = useNavigate();
-
-  const handleDetailApprove = (id: string) => {
+  const handleDetailApprove = (id: number) => {
     navigate(`/approval-hotel/${id}`);
   };
+
+  const fetchDataHotel = async () => {
+    try {
+      const response = await axios.get(`${api}/approval-hotels`);
+      const data = await response.data;
+      console.log(data);
+      setDataHotel(data);
+    } catch (error) {
+      console.error("Error:", error);
+    }
+  };
+
+  useEffect(() => {
+    fetchDataHotel();
+  }, []);
 
   return (
     <>
@@ -159,7 +76,9 @@ export default function ApproveHotel() {
                             className=" border-stroke border-[1px]"
                             key={index}
                           >
-                            <TableImage data="https://img.freepik.com/free-photo/modern-spacious-room-with-large-panoramic-window_7502-7289.jpg?w=1380&t=st=1710141114~exp=1710141714~hmac=74692f396e2c090c66b23f27a14af3b6ba9e6819b76ccd2445b6d5c0582d260d" />
+                            <TableImage
+                              data={admin_api_image + item.hotel_images}
+                            />
 
                             <TableRow
                               data={item.hotel_name}
