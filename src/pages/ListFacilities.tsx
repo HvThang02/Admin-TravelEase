@@ -88,6 +88,10 @@ export default function HotelFacility() {
   const [facilityType, setFacilityType] = useState<DataFacilityType[]>([]);
   const [facilityInput, setFacilityInput] = useState("");
   const [searchValue, setSearchValue] = useState("");
+  const [isEditing, setIsEditing] = useState(false);
+  const [editingFacilityId, setEditingFacilityId] = useState(0);
+  const [editingFacilityName, setEditingFacilityName] = useState("");
+  const [inputError, setInputError] = useState("");
 
   const fetchFacilities = async () => {
     try {
@@ -116,6 +120,11 @@ export default function HotelFacility() {
   };
 
   const addFacility = async () => {
+    if (!facilityInput.trim() || !selectedValue) {
+      setInputError("Please enter a Facility name and select a Facility type.");
+      return;
+    }
+
     try {
       const formData = new FormData();
 
@@ -156,32 +165,6 @@ export default function HotelFacility() {
     }
   };
 
-  useEffect(() => {
-    fetchFacilities();
-    fetchFacilityType();
-  }, []);
-
-  const filterOption = facilityType.map((type) => {
-    return {
-      value: type.facility_type_id,
-      label: type.facility_type_name,
-    };
-  });
-
-  const [currentPage, setCurrentPage] = useState(0);
-
-  const paginatedData = facilities
-    .filter((item) =>
-      item.facility_name
-        .toLowerCase()
-        .includes(searchValue.toLowerCase().trim())
-    )
-    .slice(currentPage * ITEMS_PER_PAGE, (currentPage + 1) * ITEMS_PER_PAGE);
-
-  const [isEditing, setIsEditing] = useState(false);
-  const [editingFacilityId, setEditingFacilityId] = useState(0);
-  const [editingFacilityName, setEditingFacilityName] = useState("");
-
   const updateFacility = async (id: number, newFacilityName: string) => {
     try {
       const updatedFacility = facilities.find(
@@ -220,6 +203,23 @@ export default function HotelFacility() {
     }
   };
 
+  const filterOption = facilityType.map((type) => {
+    return {
+      value: type.facility_type_id,
+      label: type.facility_type_name,
+    };
+  });
+
+  const [currentPage, setCurrentPage] = useState(0);
+
+  const paginatedData = facilities
+    .filter((item) =>
+      item.facility_name
+        .toLowerCase()
+        .includes(searchValue.toLowerCase().trim())
+    )
+    .slice(currentPage * ITEMS_PER_PAGE, (currentPage + 1) * ITEMS_PER_PAGE);
+
   const totalPages = Math.ceil(
     facilities.filter((item) =>
       item.facility_name
@@ -227,6 +227,11 @@ export default function HotelFacility() {
         .includes(searchValue.toLowerCase().trim())
     ).length / ITEMS_PER_PAGE
   );
+
+  useEffect(() => {
+    fetchFacilities();
+    fetchFacilityType();
+  }, []);
 
   return (
     <>
@@ -275,31 +280,49 @@ export default function HotelFacility() {
                       placeholder="Type Facility Name"
                       value={editingFacilityName}
                       onChange={(e) => setEditingFacilityName(e.target.value)}
-                      className="h-1/2"
+                      className={`h-1/2 ${
+                        inputError && !facilityInput.trim()
+                          ? "border-red-500"
+                          : ""
+                      }`}
                     />
                   ) : (
                     <Input
                       placeholder="Type Facility Name"
                       value={facilityInput}
                       onChange={(e) => setFacilityInput(e.target.value)}
-                      className="h-1/2"
+                      className={`h-1/2 ${
+                        inputError && !facilityInput.trim()
+                          ? "border-red-500"
+                          : ""
+                      }`}
                     />
                   )}
-
-                  <Select
-                    showSearch
-                    optionFilterProp="children"
-                    options={filterOption.map((option, index) => ({
-                      ...option,
-                      key: index,
-                    }))}
-                    placeholder="Search To Select"
-                    value={selectedValue}
-                    onChange={handleChangeFacilityType}
-                    className="h-1/2"
-                  />
+                  <ConfigProvider
+                    theme={{
+                      token: {
+                        colorBorder: `${
+                          inputError && !selectedValue ? "#FF0000" : "#d9d9d9"
+                        }`,
+                      },
+                    }}
+                  >
+                    <Select
+                      showSearch
+                      optionFilterProp="children"
+                      options={filterOption.map((option, index) => ({
+                        ...option,
+                        key: index,
+                      }))}
+                      placeholder="Search To Select"
+                      value={selectedValue}
+                      onChange={handleChangeFacilityType}
+                      className={`h-1/2`}
+                    />
+                  </ConfigProvider>
                 </div>
               </div>
+              {inputError && <p className="text-red-500 mb-3">{inputError}</p>}
 
               {isEditing ? (
                 <button

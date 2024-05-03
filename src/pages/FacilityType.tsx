@@ -29,6 +29,8 @@ export default function FacilityType() {
   const [editingFacilityTypeName, setEditingFacilityTypeName] = useState("");
   const [editingFacilityTypeId, setEditingFacilityTypeId] = useState(0);
 
+  const [inputError, setInputError] = useState("");
+
   const fetchFacilityType = async () => {
     try {
       const response = await axios.get(`${api}/facility-type`);
@@ -56,12 +58,18 @@ export default function FacilityType() {
   };
 
   const addNewFacilityType = async () => {
+    if (!facilityTypeValue.trim()) {
+      setInputError("Please enter a Facility Type name.");
+      return;
+    }
+
     try {
       await axios.post(`${api}/facility-type/add`, {
         facility_type_name: facilityTypeValue,
       });
       fetchFacilityType();
       setFacilityTypeValue("");
+      setInputError("");
     } catch (error) {
       console.error("Error:", error);
     }
@@ -79,6 +87,11 @@ export default function FacilityType() {
   };
 
   const updateFacilityType = async (id: number, newName: string) => {
+    if (!newName.trim()) {
+      setInputError("Please enter a Facility Type name.");
+      return;
+    }
+
     try {
       await axios.post(`${api}/facility-type/update/${id}`, {
         facility_type_name: newName,
@@ -92,6 +105,7 @@ export default function FacilityType() {
       }
 
       setIsEditing(false);
+      setInputError("");
     } catch (error) {
       console.error("Error:", error);
     }
@@ -115,22 +129,30 @@ export default function FacilityType() {
                 {isEditing ? "Update Facility Type" : "Add Facility Type"}
               </p>
               <div className="py-4">
-                {isEditing ? (
-                  <input
-                    placeholder="Type Facility Type"
-                    className="w-full p-4 border-stroke border-[1px] rounded-md"
-                    value={editingFacilityTypeName}
-                    onChange={(e) => setEditingFacilityTypeName(e.target.value)}
-                  />
-                ) : (
-                  <input
-                    placeholder="Type Facility Type"
-                    className="w-full p-4 border-stroke border-[1px] rounded-md"
-                    value={facilityTypeValue}
-                    onChange={(e) => setFacilityTypeValue(e.target.value)}
-                  />
+                <input
+                  placeholder="Facility Type Name"
+                  className={`w-full p-4  border-[1px] rounded-md ${
+                    inputError && !facilityTypeValue.trim()
+                      ? "border-red-500"
+                      : "border-stroke"
+                  }`}
+                  value={
+                    isEditing ? editingFacilityTypeName : facilityTypeValue
+                  }
+                  onChange={(e) => {
+                    if (isEditing) {
+                      setEditingFacilityTypeName(e.target.value);
+                    } else {
+                      setFacilityTypeValue(e.target.value);
+                    }
+                    setInputError("");
+                  }}
+                />
+                {inputError && !facilityTypeValue.trim() && (
+                  <p className="text-red-500 mt-2">{inputError}</p>
                 )}
               </div>
+
               {isEditing ? (
                 <button
                   className=" w-full bg-[#D3D63F] text-white items-center flex justify-center rounded-md p-4"
