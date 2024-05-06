@@ -14,14 +14,13 @@ import { api, partner_api_image } from "../constants/api";
 
 const ITEMS_PER_PAGE = 6;
 
-const headers = ["Image", "Name", "Email", "Phone", "Number of room", "Action"];
+const headers = ["Image", "Name", "Email", "Phone", "Action"];
 
 interface DataHotel {
   hotel_id: number;
   hotel_name: string;
   hotel_email: string;
   hotel_address: string;
-  number_of_rooms: number;
   hotel_contact_number: string;
   hotel_images: "";
 }
@@ -96,10 +95,7 @@ export default function ApproveHotel() {
                               data={item.hotel_contact_number}
                               onClick={undefined}
                             />
-                            <TableRow
-                              data={item.number_of_rooms}
-                              onClick={undefined}
-                            />
+
                             <td className="px-6 py-4 text-sm font-normal text-black ">
                               <div className="flex gap-7">
                                 <ActionButton
