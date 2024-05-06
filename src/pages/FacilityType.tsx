@@ -122,8 +122,8 @@ export default function FacilityType() {
       <Header pageTitle="Facility Type" />
       <div className="">
         <SideBar />
-        <div className="bg-secondary p-5 w-full pl-[240px] pt-[90px]">
-          <div className=" bg-white flex p-6">
+        <div className="bg-secondary h-fit p-5 w-full pl-[240px] pt-[90px] flex flex-col gap-4">
+          <div className=" bg-white flex p-6 h-fit">
             <div className="w-1/2 px-8">
               <p className="items-center justify-center flex font-normal text-2xl w-full  p-2">
                 {isEditing ? "Update Facility Type" : "Add Facility Type"}
@@ -174,7 +174,7 @@ export default function FacilityType() {
                 </button>
               )}
             </div>
-            <div className="w-1/2 px-8 border-l-[1px] border-stroke">
+            <div className="w-1/2 px-8 border-l-[1px] border-stroke h-full">
               <div className="w-full">
                 <p className="font-normal text-2xl w-full px-2 pb-2">
                   List Facility Types

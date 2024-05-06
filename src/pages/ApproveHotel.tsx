@@ -10,7 +10,7 @@ import ActionButton from "../components/TableButton";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 
-import { admin_api_image, api } from "../constants/api";
+import { api, partner_api_image } from "../constants/api";
 
 const ITEMS_PER_PAGE = 6;
 
@@ -44,7 +44,6 @@ export default function ApproveHotel() {
     try {
       const response = await axios.get(`${api}/approval-hotels`);
       const data = await response.data;
-      console.log(data);
       setDataHotel(data);
     } catch (error) {
       console.error("Error:", error);
@@ -61,9 +60,10 @@ export default function ApproveHotel() {
 
       <div className="flex">
         <SideBar />
-        <div className=" bg-gray-100 h-fit p-5 w-full pl-[240px] pt-[90px] flex flex-col gap-4">
-          <p className=" w-full text-2xl font-[400]">Approve Hotel</p>
-          <div className=" bg-white p-6">
+        <div className=" bg-secondary h-[100vh] p-5 w-full pl-[240px] pt-[90px] flex flex-col gap-4">
+          <div className=" bg-white p-6 h-full">
+            <p className=" w-full text-2xl font-[400]">Approve Hotel</p>
+
             <div className="flex flex-col">
               <div className="overflow-x-auto sm:-mx-6 lg:-mx-8">
                 <div className="inline-block min-w-full py-4 sm:px-6 lg:px-8">
@@ -77,7 +77,11 @@ export default function ApproveHotel() {
                             key={index}
                           >
                             <TableImage
-                              data={admin_api_image + item.hotel_images}
+                              data={
+                                item.hotel_images[0]
+                                  ? partner_api_image + item.hotel_images[0]
+                                  : "https://www.capstone-api-partner.online//hotel_images/minh-pham-OtXADkUh3-I-unsplash.jpg"
+                              }
                             />
 
                             <TableRow

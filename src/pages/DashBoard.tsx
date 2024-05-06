@@ -12,7 +12,7 @@ import { admin_api_image, api } from "../constants/api";
 
 const { Option } = Select;
 
-type PickerType = "time" | "date";
+type PickerType = "date";
 
 const PickerWithType = ({
   type,
@@ -21,7 +21,6 @@ const PickerWithType = ({
   type: PickerType;
   onChange: TimePickerProps["onChange"] | DatePickerProps["onChange"];
 }) => {
-  if (type === "time") return <TimePicker onChange={onChange} />;
   if (type === "date") return <DatePicker onChange={onChange} />;
   return <DatePicker picker={type} onChange={onChange} />;
 };
@@ -32,6 +31,23 @@ const renderPaymentTransferred = (paymentTransferred: boolean) => {
   return <span style={{ color: color }}>{status}</span>;
 };
 
+const renderTotalPrice = (totalPrice: string) => {
+  const formattedPrice = parseInt(totalPrice).toLocaleString("vi-VN", {
+    style: "currency",
+    currency: "VND",
+  });
+  return <span>{formattedPrice}</span>;
+};
+
+const renderProfit = (totalPrice: string) => {
+  const profit = parseFloat(totalPrice) * 0.4;
+  const formattedProfit = profit.toLocaleString("vi-VN", {
+    style: "currency",
+    currency: "VND",
+  });
+  return <span>{formattedProfit}</span>;
+};
+
 const columns = [
   {
     title: "Ticket ID",
@@ -39,11 +55,13 @@ const columns = [
   },
   {
     title: "Total Price",
-    dataIndex: "total_price",
+    dataIndex: "total",
+    render: renderTotalPrice,
   },
   {
     title: "Profit",
-    dataIndex: "profit",
+    dataIndex: "total",
+    render: renderProfit,
   },
   {
     title: "Payment Transferred",
@@ -54,27 +72,32 @@ const columns = [
 
 interface DataTicket {
   ticket_id: string;
-  total_price: string;
+  total: string;
   profit: string;
   payment_transferred: boolean;
 }
 
 export default function DashBoard() {
-  const [type, setType] = useState<PickerType>("time");
+  const [type, setType] = useState<PickerType>("date");
 
   const [ticketData, setTicketData] = useState<DataTicket[]>([]);
 
-  useEffect(() => {
-    const fetchDataTicket = async () => {
-      try {
-        const response = await axios.get(`${api}/tickets`);
-        const responseData = await response.data;
-        setTicketData(responseData.data);
-      } catch (error) {
-        console.error("Error:", error);
-      }
-    };
+  const fetchDataTicket = async () => {
+    try {
+      const response = await axios.get(`${api}/tickets`);
+      const responseData = await response.data;
+      setTicketData(responseData.data);
+    } catch (error) {
+      console.error("Error:", error);
+    }
+  };
 
+  const totalProfit = ticketData.reduce((acc, ticket) => {
+    const profit = parseFloat(ticket.total) * 0.4;
+    return acc + profit;
+  }, 0);
+
+  useEffect(() => {
     fetchDataTicket();
   }, []);
 
@@ -88,18 +111,19 @@ export default function DashBoard() {
             <p className="text-2xl w-full font-bold">Business Insights</p>
             <div className="flex items-center w-full justify-between py-6">
               <div className="border-r border-stroke w-full px-12">
-                <p className="text-grey">Paid</p>
-                <p className=" font-bold text-xl">VND 400,000,000</p>
+                <p className="text-grey">Total Ticket</p>
+                <p className=" font-bold text-xl">{ticketData.length}</p>
                 <p className="text-grey">This Week</p>
               </div>
-              <div className="border-r border-stroke w-full px-12">
-                <p className="text-grey">Unpaid</p>
-                <p className=" font-bold text-xl">VND 400,000,000</p>
-                <p className="text-grey">This Week</p>
-              </div>
+
               <div className=" w-full px-12">
                 <p className="text-grey">Profit</p>
-                <p className=" font-bold text-xl">VND 400,000,000</p>
+                <p className=" font-bold text-xl">
+                  {totalProfit.toLocaleString("vi-VN", {
+                    style: "currency",
+                    currency: "VND",
+                  })}
+                </p>
                 <p className="text-grey">This Week</p>
               </div>
             </div>
@@ -132,7 +156,7 @@ export default function DashBoard() {
                 />
               </Space>
             </div>
-            <Table columns={columns} dataSource={ticketData} />;
+            <Table columns={columns} dataSource={ticketData} />
           </div>
         </div>
       </div>

@@ -238,7 +238,7 @@ export default function HotelFacility() {
       <Header pageTitle="Hotel Facility" />
       <div className="">
         <SideBar />
-        <div className="bg-gray-100 h-fit p-5 w-full pl-[240px] pt-[90px] flex flex-col gap-4">
+        <div className=" bg-secondary h-fit p-5 w-full pl-[240px] pt-[90px] flex flex-col gap-4">
           <div className=" bg-white flex p-6 h-fit">
             <div className="w-1/2 px-8">
               <p className="items-center justify-center flex font-normal text-2xl w-full  p-2">

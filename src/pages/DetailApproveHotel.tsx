@@ -13,7 +13,7 @@ import { FaCheck } from "react-icons/fa6";
 import { IoBanSharp } from "react-icons/io5";
 import { Result } from "antd";
 
-import { admin_api_image, api } from "../constants/api";
+import { admin_api_image, api, partner_api_image } from "../constants/api";
 
 export default function DetailApproveHotel() {
   const navigate = useNavigate();
@@ -63,8 +63,9 @@ export default function DetailApproveHotel() {
     const fetchHotel = async () => {
       try {
         const response = await axios.get(`${api}/approval-hotel/${hotel_id}`);
-        const data = response.data;
-        setDataHotel(data.data);
+        const responseData = response.data;
+        console.log(responseData.data);
+        setDataHotel(responseData.data);
       } catch (error) {
         console.error("Error:", error);
       }
@@ -227,7 +228,7 @@ export default function DetailApproveHotel() {
                     {dataHotel.hotel_images.map((image, index) => (
                       <img
                         key={index}
-                        src={admin_api_image + image}
+                        src={partner_api_image + image}
                         alt={`Hotel Image ${index + 1}`}
                         className="h-[20vh] object-cover rounded-md"
                       />
@@ -281,7 +282,9 @@ export default function DetailApproveHotel() {
                 <div className="w-[50vh]">
                   <h2>ID Front</h2>
                   <img
-                    // src={dataHotel.id_card.front}
+                    src={
+                      "https://upload.wikimedia.org/wikipedia/commons/9/96/C%C4%83n_c%C6%B0%E1%BB%9Bc_c%C3%B4ng_d%C3%A2n_g%E1%BA%AFn_ch%C3%ADp_m%E1%BA%B7t_tr%C6%B0%E1%BB%9Bc.jpg"
+                    }
                     alt="ID Front"
                     className="h-[20vh] object-cover rounded-md"
                   />
@@ -289,7 +292,9 @@ export default function DetailApproveHotel() {
                 <div className="ml-5">
                   <h2>ID Back</h2>
                   <img
-                    // src={dataHotel.id_card.back}
+                    src={
+                      "https://sotnmt.soctrang.gov.vn/SiteFolders/vpubnd/4728/AnhTin/2021/Thang2/image2%20(2).jpg"
+                    }
                     alt="ID Back"
                     className="h-[20vh] object-cover rounded-md"
                   />
