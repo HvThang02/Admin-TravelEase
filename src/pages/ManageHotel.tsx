@@ -10,48 +10,50 @@ import { CiSearch } from "react-icons/ci";
 const columns = [
   {
     title: "ID",
-    dataIndex: "id",
+    dataIndex: "hotelId",
   },
   {
     title: "Name",
-    dataIndex: "hotel_name",
-    render: (text: string, record: any) => (
-      <Link to={`/manage-hotel/${record.id}`}>{text}</Link>
-    ),
+    dataIndex: "hotelName",
   },
 
   {
     title: "Phone",
-    dataIndex: "hotel_contact_number",
+    dataIndex: "hotelContactNumber",
   },
   {
     title: "Registrar",
-    dataIndex: "hotel_contact_number",
+    dataIndex: "owner",
   },
 ];
 
+interface DataHotel {
+  hotelId: string;
+  hotelContactNumber: any;
+  hotelName: string;
+  owner: string;
+}
+
 export default function ManageHotel() {
-  const [dataHotel, setDataHotel] = useState<
-    {
-      id: string;
-      hotel_contact_number: any;
-      hotel_name: string;
-      user: {
-        fullname: string;
-      };
-    }[]
-  >([]);
+  const [dataHotel, setDataHotel] = useState<DataHotel[]>([]);
+
+  const [searchValue, setSearchValue] = useState("");
+
+  const searchData = dataHotel.filter((item) =>
+    item.hotelName.toLowerCase().includes(searchValue.toLowerCase().trim())
+  );
+
+  const fetchDataHotel = async () => {
+    try {
+      const response = await axios.get(`${api}/approve-hotels`);
+      const reponseData = await response.data;
+      setDataHotel(reponseData.data);
+    } catch (error) {
+      console.error("Error:", error);
+    }
+  };
 
   useEffect(() => {
-    const fetchDataHotel = async () => {
-      try {
-        const response = await axios.get(`${api}/approve-hotels`);
-        const data = await response.data;
-        setDataHotel(data);
-      } catch (error) {
-        console.error("Error:", error);
-      }
-    };
     fetchDataHotel();
   }, []);
 
@@ -67,6 +69,8 @@ export default function ManageHotel() {
               <input
                 type="text"
                 placeholder="Search Name Hotel"
+                value={searchValue}
+                onChange={(e) => setSearchValue(e.target.value)}
                 className="w-full outline-none text-sm"
               />
               <CiSearch />
@@ -79,7 +83,14 @@ export default function ManageHotel() {
                 },
               }}
             >
-              <Table columns={columns} dataSource={dataHotel} size="small" />
+              <Table
+                columns={columns}
+                dataSource={searchData.map((item) => ({
+                  ...item,
+                  key: item.hotelId,
+                }))}
+                size="small"
+              />
             </ConfigProvider>
           </div>
         </div>

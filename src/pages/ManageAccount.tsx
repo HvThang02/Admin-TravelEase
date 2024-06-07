@@ -36,16 +36,25 @@ interface DataUser {
 export default function ManageAccount() {
   const [dataAccount, setDataAccount] = useState<DataUser[]>([]);
 
+  const [searchValue, setSearchValue] = useState("");
+
+  const searchData = dataAccount.filter(
+    (item) =>
+      item.email &&
+      item.email.toLowerCase().includes(searchValue.toLowerCase().trim())
+  );
+
+  const fetchDataHotel = async () => {
+    try {
+      const response = await axios.get(`${api}/users`);
+      const responseData = await response.data;
+      setDataAccount(responseData.data);
+    } catch (error) {
+      console.error("Error:", error);
+    }
+  };
+
   useEffect(() => {
-    const fetchDataHotel = async () => {
-      try {
-        const response = await axios.get(`${api}/users`);
-        const responseData = await response.data;
-        setDataAccount(responseData.data);
-      } catch (error) {
-        console.error("Error:", error);
-      }
-    };
     fetchDataHotel();
   }, []);
   return (
@@ -60,6 +69,8 @@ export default function ManageAccount() {
               <input
                 type="text"
                 placeholder="Search Email Account"
+                value={searchValue}
+                onChange={(e) => setSearchValue(e.target.value)}
                 className="w-full outline-none text-sm"
               />
               <CiSearch />
@@ -74,9 +85,9 @@ export default function ManageAccount() {
             >
               <Table
                 columns={columns}
-                dataSource={dataAccount.map((user, index) => ({
-                  ...user,
-                  key: index,
+                dataSource={searchData.map((item) => ({
+                  ...item,
+                  key: item.user_id,
                 }))}
                 size="small"
               />

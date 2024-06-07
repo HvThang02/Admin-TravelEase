@@ -242,7 +242,7 @@ export default function HotelFacility() {
           <div className=" bg-white flex p-6 h-fit">
             <div className="w-1/2 px-8">
               <p className="items-center justify-center flex font-normal text-2xl w-full  p-2">
-                Add Facility
+                {isEditing ? <p>Update Facility</p> : <p>Add Facility</p>}
               </p>
               <div className="py-4 flex gap-3">
                 <div className=" flex">
